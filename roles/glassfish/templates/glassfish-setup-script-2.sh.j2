@@ -1,0 +1,122 @@
+#!/bin/bash
+
+
+until {{ glassfish_path }}/bin/asadmin enable-secure-admin
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin delete-jvm-options -- -client
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -- -server
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin delete-jvm-options -- -Xmx512m
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -- -Xms4096m
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -- -Xmx4096m
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin delete-jvm-options '-XX\:MaxPermSize=192m'
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -- '-XX\:MaxMetaspaceSize=512m'
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -- '-XX\:MetaspaceSize=512m'
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -Djdk.tls.rejectClientInitiatedRenegotiation=true
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin create-jvm-options -Dproduct.name=""
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.network-config.protocols.protocol.http-listener-1.http.xpowered-by=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.network-config.protocols.protocol.http-listener-2.http.xpowered-by=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.network-config.protocols.protocol.admin-listener.http.xpowered-by=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.network-config.protocols.protocol.sec-admin-listener.http.xpowered-by=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.admin-service.das-config.autodeploy-enabled=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.network-config.protocols.protocol.http-listener-2.ssl.ssl3-enabled=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.network-config.protocols.protocol.sec-admin-listener.ssl.ssl3-enabled=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.iiop-service.iiop-listener.SSL.ssl.ssl3-enabled=false
+do
+  echo "Try again"
+  sleep 2
+done
+
+until {{ glassfish_path }}/bin/asadmin set server.iiop-service.iiop-listener.SSL_MUTUALAUTH.ssl.ssl3-enabled=false
+do
+  echo "Try again"
+  sleep 2
+done

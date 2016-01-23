@@ -1,0 +1,13 @@
+[Unit]
+Description = GlassFish Server v4.1
+After = syslog.target network.target
+
+[Service]
+User=glassfish
+ExecStart = {{ java8_install_latest }}/bin/java -jar {{ glassfish_path }}/glassfish/lib/client/appserver-cli.jar start-domain
+ExecStop = {{ java8_install_latest }}/bin/java -jar {{ glassfish_path }}/glassfish/lib/client/appserver-cli.jar stop-domain
+ExecReload = {{ java8_install_latest }}/bin/java -jar {{ glassfish_path }}/glassfish/lib/client/appserver-cli.jar restart-domain
+Type = forking
+
+[Install]
+WantedBy = multi-user.target

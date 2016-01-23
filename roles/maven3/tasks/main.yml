@@ -1,0 +1,37 @@
+---
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ maven3_install }}"
+  tags: maven3
+
+- name: download maven3 archive
+  get_url: url={{ maven3_url }} dest={{ maven3_archive }}
+  tags: maven3
+
+- name: extract archive to install directory
+  unarchive: src={{ maven3_archive }} dest={{ maven3_install }} copy=no mode=0755 owner=root group=root creates="{{ maven3_install_target }}"
+  tags: maven3
+
+- name: create latest symbolic link for maven3
+  file: src={{ maven3_install_target }} dest={{ maven3_install_latest }} mode=0755 state=link
+  when: maven3_latest == "true"
+  tags: maven3
+
+- name: create default symbolic link for maven3
+  file: src={{ maven3_install_latest }} dest={{ maven3_install_default }} mode=0755 state=link
+  when: maven3_default == "true"
+  tags: maven3
+
+- name: ensure specified user exists
+  user: name={{ maven3_user }} system=yes shell=/bin/bash
+  tags: maven3
+
+- name: ensure .m2 directory exists
+  file: path={{ maven3_m2_dir }} state=directory owner={{ maven3_user }}
+  tags: maven3
+
+- name: copy settings.xml template
+  template: src=settings.xml.j2 dest="{{ maven3_m2_dir }}/settings.xml" owner={{ maven3_user }}
+  tags: maven3

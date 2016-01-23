@@ -1,0 +1,25 @@
+---
+
+- name: remove apache2 if present
+  apt: name={{ item }} state=absent
+  with_items:
+    - apache
+    - apache2
+  tags: glassfish
+
+- name: add glassfishadm group
+  group: name=glassfishadm
+  tags: glassfish
+
+- name: add jscheel to glassfishadm group
+  user: name=jscheel groups="{{ groups_admin_debian }},glassfishadm"
+  tags: glassfish
+
+- name: setup port redirection using before.rules
+  template: src=before.rules.j2 dest=/etc/ufw/before.rules
+  notify: reload ufw settings
+  tags: glassfish
+
+- name: copy init.d service for glassfish
+  template: src=glassfish.init.j2 dest={{ glassfish_service }} mode=0755
+  tags: glassfish

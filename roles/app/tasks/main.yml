@@ -1,0 +1,6 @@
+---
+
+- name: create app user
+  user:
+    name: "{{ app_user }}"
+  tags: app

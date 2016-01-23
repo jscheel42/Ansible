@@ -1,0 +1,10 @@
+---
+
+- name: update all zypper packages
+  # This format doesn't update any packages on HTPC, bug in ansible?
+  # zypper:
+  #   name='*'
+  #   state=latest
+  shell: zypper -n up
+  when: update_all_packages == "yes"
+  tags: update

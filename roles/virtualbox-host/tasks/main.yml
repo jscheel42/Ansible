@@ -1,0 +1,17 @@
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+- name: add user to vboxusers
+  user:
+    name: "{{ virtualbox_user }}"
+    groups: "vboxusers"
+    append: yes
+  tags: virtualbox-host

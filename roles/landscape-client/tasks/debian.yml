@@ -1,0 +1,20 @@
+---
+
+- name: install landscape-client
+  apt: name=landscape-client state=present
+  tags: landscape-client
+
+- name: apply landscape-client config
+  template: src=landscape-client.conf.j2 dest=/etc/landscape/client.conf
+  notify: landscape client update config restart
+  tags: landscape-client
+
+- name: upload ssl key for landscape-client
+  # copy: src=/tmp/ansible/{{ environment_name }}_landscape_server_ca.crt dest=/etc/landscape/landscape_server_ca.crt
+  copy: src=files/{{ environment_name }}_landscape_server_ca.crt dest=/etc/landscape/landscape_server_ca.crt
+  notify: landscape client update config restart
+  tags: landscape-client
+
+- name: ensure landscape-client service is running, regardless of component updates
+  service: name=landscape-client state=started
+  tags: landscape-client

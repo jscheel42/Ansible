@@ -1,0 +1,30 @@
+
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ spring_install }}"
+  tags: spring
+
+- name: download spring archive
+  get_url: url={{ spring_url }} dest={{ spring_archive }}
+  tags: spring
+
+- name: extract archive to install directory
+  unarchive: src={{ spring_archive }} dest={{ spring_install }} copy=no mode=0755 owner=root group=root creates="{{ spring_install_target }}"
+  tags: spring
+
+- name: create latest symbolic link for spring
+  file: src={{ spring_install_target }} dest={{ spring_install_latest }} mode=0755 state=link
+  tags: spring
+

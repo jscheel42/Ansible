@@ -1,0 +1,33 @@
+---
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ gradle_install }}"
+  tags: gradle
+
+- name: download gradle archive
+  get_url: url={{ gradle_url }} dest={{ gradle_archive }}
+  tags: gradle
+
+- name: extract archive to install directory
+  unarchive: src={{ gradle_archive }} dest={{ gradle_install }} copy=no mode=0755 owner=root group=root creates="{{ gradle_install_target }}"
+  tags: gradle
+
+- name: create latest symbolic link for gradle
+  file: src={{ gradle_install_target }} dest={{ gradle_install_latest }} mode=0755 state=link
+  tags: gradle
+
+- name: create .gradle directory for gradle_user
+  file:
+    path: "~{{ gradle_user }}/.gradle"
+    state: directory
+    owner: "{{ gradle_user }}"
+  tags: gradle
+
+- name: copy gradle.properties template
+  template:
+    src: gradle.properties.j2
+    dest: "~{{ gradle_user }}/.gradle/gradle.properties"
+    owner: "{{ gradle_user }}"
+  tags: maven3

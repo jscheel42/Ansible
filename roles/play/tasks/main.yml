@@ -1,0 +1,19 @@
+---
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ play_install }}"
+  tags: play
+
+- name: download play archive
+  get_url: url={{ play_url }} dest={{ play_archive }}
+  tags: play
+
+- name: extract archive to install directory
+  unarchive: src={{ play_archive }} dest={{ play_install }} copy=no mode=0755 owner=root group=root creates="{{ play_install_target }}"
+  tags: play
+
+- name: create latest symbolic link for play
+  file: src={{ play_install_target }} dest={{ play_install_latest }} mode=0755 state=link
+  tags: play

@@ -1,0 +1,55 @@
+
+---
+
+- name: ensure tomcat user exists
+  user: name={{ tomcat_user }} system=yes shell=/bin/bash createhome=yes
+  tags: tomcat
+
+- name: ensure tomcat group exists
+  group: name={{ tomcat_user }} system=yes
+  tags: tomcat
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ tomcat_install }}"
+  tags: tomcat
+
+- name: download java archive from oracle
+  get_url: url={{ tomcat_url }} dest={{ tomcat_archive }}
+  tags: tomcat
+
+- name: extract archive to install directory
+  unarchive: src={{ tomcat_archive }} dest={{ tomcat_install }} copy=no mode=0755 owner={{ tomcat_user }} creates="{{ tomcat_install_target }}" # group={{ tomcat_user }}
+  tags: tomcat
+
+- name: create latest symbolic link for tomcat
+  file: src={{ tomcat_install_target }} dest="{{ tomcat_install_latest }}" mode=0755 state=link owner={{ tomcat_user }} # group={{ tomcat_user }}
+  tags: tomcat
+
+- name: set owner on tomcat directory
+  file: path={{ tomcat_install_target }} owner={{ tomcat_user }} recurse=yes state=directory # group={{ tomcat_user }}
+  tags: tomcat
+
+- name: set permissions on tomcat conf
+  file: path={{ tomcat_install_target }} mode=0740 state=directory
+  tags: tomcat
+
+- name: copy tomcat-users.xml
+  template: src=tomcat-users.xml.j2 dest={{ tomcat_install_latest }}/conf/tomcat-users.xml mode=0740
+  notify: restart tomcat
+  tags: tomcat
+
+- name: add systemd service file for tomcat
+  template: src=tomcat.service.j2 dest=/etc/systemd/system/tomcat.service owner=root group=root
+  register: tomcat_systemd_update
+  tags: tomcat
+
+- name: reload systemd config to make unit file available
+  shell: systemctl daemon-reload
+  when: tomcat_systemd_update|changed
+  tags: tomcat
+
+- name: start/enable tomcat service
+  service: name=tomcat state=started enabled=yes
+  tags: tomcat

@@ -1,0 +1,5 @@
+---
+
+spacewalk_server_tracking_dir: /usr/local/share/spacewalk-server-tracking
+spacewalk_server_tracking_file: "{{ spacewalk_server_tracking_dir }}/server_configured"
+spacewalk_server_tracking_file_data: "{{ spacewalk_server_tracking_file_cat.stdout }}"

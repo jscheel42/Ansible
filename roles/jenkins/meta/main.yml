@@ -1,0 +1,32 @@
+---
+
+dependencies:
+  - tomcat
+  - role: gradle
+    linux_user: "tomcat"
+  - role: maven3
+    linux_user: "tomcat"
+    maven3_version_major: 3.3
+    maven3_version_minor: 3
+    maven3_default: "true"
+    maven3_latest: "true"
+  - role: maven3
+    linux_user: "tomcat"
+    maven3_version_major: 3.2
+    maven3_version_minor: 5
+    maven3_default: "false"
+    maven3_latest: "true"
+  - role: maven3
+    linux_user: "tomcat"
+    maven3_version_major: 3.1
+    maven3_version_minor: 1
+    maven3_default: "false"
+    maven3_latest: "true"
+  - role: ssh-keys
+    linux_user: "tomcat"
+  - git
+  - role: jruby
+    # jruby_user: "tomcat"
+    linux_user: "tomcat"
+    jruby_gems:
+      - bundler

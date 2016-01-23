@@ -1,0 +1,29 @@
+
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ java8_install }}"
+  tags: java8
+
+- name: download java archive from oracle
+  shell: "wget -q -O {{ java8_archive }} --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{ java8_url }} creates={{ java8_archive }}"
+  tags: java8
+
+- name: extract archive to install directory
+  unarchive: src={{ java8_archive }} dest={{ java8_install }} copy=no mode=0755 owner=root group=root creates="{{ java8_install_target }}"
+  tags: java8
+
+- name: create latest symbolic link for java8
+  file: src="{{ java8_install_target }}" dest="{{ java8_install }}/latest" mode=0755 state=link
+  tags: java8

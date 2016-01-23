@@ -1,0 +1,9 @@
+---
+
+- name: remove openjdk
+  apt: name=*openjdk* state=absent
+  tags: java8
+
+- name: install wget for java8 download
+  apt: name=wget state=present
+  tags: java8

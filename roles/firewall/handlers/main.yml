@@ -1,0 +1,11 @@
+---
+
+- name: reload ufw settings
+  ufw: state=reloaded
+  when: ansible_os_family == "Debian"
+  tags: firewall
+
+- name: reload firewalld settings
+  service: name=firewalld state=reloaded
+  when: ansible_os_family == "RedHat"
+  tags: firewall

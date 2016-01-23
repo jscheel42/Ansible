@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - role: firewall
+    tcp_ports_allow:
+      - 80
+      - 443

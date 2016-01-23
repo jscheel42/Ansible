@@ -1,0 +1,10 @@
+---
+
+- name: perform exorcism
+  zypper: name=flash-player state=absent
+  tags: common
+
+- name: install common packages
+  zypper: name={{ item }} state=present
+  with_items: common_package_list_suse
+  tags: common

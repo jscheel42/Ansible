@@ -1,0 +1,61 @@
+---
+
+  # Most steps are skipped if a current installation of the requested version already exists
+
+- name: read version from file on server
+  shell: cat {{ intellij_version_file }}
+  register: intellij_version_cat
+  ignore_errors: yes
+  changed_when: False
+  tags: intellij
+
+- name: create install directory
+  file: path={{ intellij_install_dir }} state=directory
+  tags: intellij
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ intellij_tmp_dir }}"
+  when: intellij_version_file_data != "{{ intellij_version }}"
+  tags: intellij
+
+- name: download intellij tar file (community edition)
+  get_url: url={{ intellij_url_c }} dest={{ intellij_archive }}
+  when: intellij_version_file_data != "{{ intellij_version }}" and intellij_type == "community"
+  tags: intellij
+
+- name: download intellij tar file (ultimate edition)
+  get_url: url={{ intellij_url_u }} dest={{ intellij_archive }}
+  when: intellij_version_file_data != "{{ intellij_version }}" and intellij_type == "ultimate"
+  tags: intellij
+
+- name: extract intellij tar file
+  unarchive: src={{ intellij_archive }} dest={{ intellij_tmp_dir }} copy=no
+  when: intellij_version_file_data != "{{ intellij_version }}"
+  tags: intellij
+
+- name: move intellij folder to standard location
+  shell: cp -r {{ intellij_tmp_dir }}/*/* {{ intellij_install_dir }}/
+  when: intellij_version_file_data != "{{ intellij_version }}"
+  tags: intellij
+
+- name: set current user as owner of intellij directory
+  file: path={{ intellij_install_dir }} owner={{ intellij_user }} recurse=yes state=directory # group={{ intellij_user }}
+  tags: intellij
+
+- name: setup executable in /usr/bin
+  template: src=intellij.j2 dest=/usr/bin/intellij mode=0755
+  tags: intellij
+
+- name: setup desktop icon for intellij
+  template: src=intellij.desktop.j2 dest=/usr/share/applications/intellij.desktop
+  tags: intellij
+
+- name: setup idea.properties
+  template: src=idea.properties.j2 dest={{ intellij_install_dir }}/bin/idea.properties
+  tags: intellij
+
+- name: write version file
+  template: src=intellij_version.j2 dest={{ intellij_version_file }}
+  tags: intellij

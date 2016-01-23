@@ -1,0 +1,13 @@
+---
+
+allow_duplicates: yes
+
+dependencies:
+  - java8
+  - role: bash
+    bash_global: "yes"
+    bash_line: "'export PATH=$PLAY_HOME:$PATH'"
+  - role: bash
+    bash_global: "yes"
+    bash_insert_before: ^.*PLAY_HOME:.*$
+    bash_line: "'export PLAY_HOME={{ play_install_latest }}'"

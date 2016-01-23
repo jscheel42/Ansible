@@ -1,0 +1,5 @@
+git_user: "{{ linux_user }}"
+git_user_home: /home/{{ git_user }}
+git_keyfile: "{{ ssh_keyfile_private }}"
+git_co_info:
+  - { git_repo: [], git_dir: [], git_update: [] }

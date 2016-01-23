@@ -1,0 +1,39 @@
+---
+
+- name: add the spacewalk client repo
+  yum: name={{ spacewalk_client_repo }} state=present
+  tags: spacewalk-client
+
+- name: install packages for spacewalk client
+  yum: name={{ item }} state=present # update_cache=yes
+  with_items:
+    - rhn-client-tools
+    - rhn-check
+    - rhn-setup
+    - rhnsd
+    - m2crypto
+    - yum-rhn-plugin
+  tags: spacewalk-client
+
+- name: create directory to hold tracking files
+  file: path={{ spacewalk_client_tracking_dir }} state=directory
+  tags: spacewalk-client
+
+- name: register client with the spacewalk server
+  shell: bash -lc "rhnreg_ks --force --serverUrl=http://{{ spacewalk_register_url }}/XMLRPC --activationkey={{ secret_spacewalk_centos7_key }} && touch {{ spacewalk_client_tracking_dir }}/client_registered"
+  args:
+    creates: "{{ spacewalk_client_tracking_dir }}/client_registered"
+  tags: spacewalk-client
+
+- name: add spacewalk client channel
+  shell: bash -lc "spacewalk-channel -a -u {{ spacewalk_web_username }} -p {{ spacewalk_web_password }} -c {{ spacewalk_add_channel_client }} && touch {{ spacewalk_client_tracking_dir }}/{{ spacewalk_add_channel_client }}"
+  args:
+    creates: "{{ spacewalk_client_tracking_dir }}/{{ spacewalk_add_channel_client }}"
+  tags: spacewalk-client
+
+- name: add custom spacewalk channels
+  shell: bash -lc "spacewalk-channel -a -u {{ spacewalk_web_username }} -p {{ spacewalk_web_password }} -c {{ item }} && touch {{ spacewalk_client_tracking_dir }}/{{ item }}"
+  args:
+    creates: "{{ spacewalk_client_tracking_dir }}/{{ item }}"
+  with_items: spacewalk_add_channel_list
+  tags: spacewalk-client

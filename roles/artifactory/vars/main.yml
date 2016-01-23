@@ -1,0 +1,13 @@
+# artifactory_home: /home/artifactory
+# artifactory_war: "{{ artifactory_home }}/artifactory.war"
+# artifactory_url_war: http://bit.ly/Hqv9aj
+# artifactory_url_rpm_repo: https://bintray.com/jfrog/artifactory-rpms/rpm
+# artifactory_path: "{{ artifactory_home }}/artifactory-latest"
+
+artifactory_url: "https://bintray.com/artifact/download/jfrog/artifactory/jfrog-artifactory-oss-{{ artifactory_version }}.zip"
+artifactory_zip: "/tmp/artifactory-{{ artifactory_version }}.zip"
+artifactory_unzipped_war: /tmp/artifactory-oss-{{ artifactory_version }}/webapps/artifactory.war
+artifactory_war: "{{ tomcat_install_latest }}/webapps/artifactory.war"
+artifactory_deploy: "{{ tomcat_install_latest }}/webapps/artifactory"
+artifactory_version_file: "{{ tomcat_install_latest }}/webapps/artifactory-version"
+artifactory_version_file_data: "{{ artifactory_version_cat.stdout }}"

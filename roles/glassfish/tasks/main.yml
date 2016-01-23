@@ -1,0 +1,83 @@
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- name: add glassfish user
+  user: name=glassfish createhome=yes system=yes shell=/bin/bash
+  tags: glassfish
+
+- name: create directory for glassfish
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ glassfish_path }}"
+    - "{{ glassfish_src }}"
+    - "{{ glassfish_home }}/.gfclient"
+  tags: glassfish
+
+- name: download glassfish zip file
+  get_url: url={{ glassfish_url }} dest={{ glassfish_zip }}
+  tags: glassfish
+
+- name: extract glassfish zip file
+  unarchive: creates="{{ glassfish_path }}/glassfish" src={{ glassfish_zip }} dest={{ glassfish_home }} copy=no
+  tags: glassfish
+
+# .org.opensolaris,pkg requires a second move command because some idiot put a comma in their folder name
+- name: move glassfish folder to standard location
+  shell: creates="{{ glassfish_path }}/glassfish" mv {{ glassfish_home }}/glassfish*/* {{ glassfish_path }}/ && mv {{ glassfish_home }}/glassfish*/.org.opensolaris,pkg/ {{ glassfish_path }}/ && rm -rf {{ glassfish_home }}/glassfish*
+  register: glassfish_updated
+  tags: glassfish
+
+- name: make sure executables are... executable
+  file: path={{ item }} mode=0770 recurse=yes state=directory
+  with_items:
+    - "{{ glassfish_path }}/bin"
+    - "{{ glassfish_path }}/glassfish/bin"
+  tags: glassfish
+
+- name: upload manual password entry script 1
+  template: src=glassfish-setup-script-1.sh.j2 dest={{ glassfish_setup_script_1 }} owner=glassfish group=glassfishadm mode=0700
+  when: glassfish_updated|changed
+  tags: glassfish
+
+- name: upload manual password entry script 2
+  template: src=glassfish-setup-script-2.sh.j2 dest={{ glassfish_setup_script_2 }} owner=glassfish group=glassfishadm mode=0700
+  when: glassfish_updated|changed
+  tags: glassfish
+
+- name: set permissions on glassfish directory
+  file: path={{ glassfish_home }} owner=glassfish group=glassfishadm recurse=yes state=directory
+  tags: glassfish
+
+# Need Ansible 2.0 (expect module) to get around awkward glassfish manual steps https://docs.ansible.com/ansible/expect_module.html
+- name: MANUALLY RUN SCRIPT 1 FOR ADMIN AND MASTER
+  pause: prompt="ssh to {{ ansible_hostname }}, switch to glassfish user, run {{ glassfish_setup_script_1 }}.  Passwords should match those in .vault/glassfish_pw."
+  when: glassfish_updated|changed
+  tags: glassfish
+
+- name: start and enable service for glassfish
+  service: name=glassfish state=started enabled=yes pattern=/home/glassfish/latest/glassfish
+  tags: glassfish
+
+# The expect module is sorely needed...
+- name: MANUALLY RUN SCRIPT 2 FOR OPTIONS CONFIG
+  pause: prompt="ssh to {{ ansible_hostname }}, switch to glassfish user, run {{ glassfish_setup_script_2 }}.  Passwords should match those in .vault/glassfish_pw."
+  when: glassfish_updated|changed
+  tags: glassfish
+
+- name: remove glassfish setup script files
+  file: path={{ item }} state=absent
+  with_items:
+    - "{{ glassfish_setup_script_1 }}"
+    - "{{ glassfish_setup_script_2 }}"
+  when: glassfish_updated|changed
+  tags: glassfish
+
+- name: restart glassfish service
+  service: name=glassfish state=restarted
+  when: glassfish_updated|changed
+  tags: glassfish

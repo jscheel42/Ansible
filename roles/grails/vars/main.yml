@@ -1,0 +1,9 @@
+---
+
+grails_version: 3.0.11
+grails_url: "https://github.com/grails/grails-core/releases/download/v{{ grails_version }}/grails-{{ grails_version }}.zip"
+grails_download_folder: /usr/local/src
+grails_archive: "{{ grails_download_folder }}/grails-{{ grails_version }}-linux-x64.tar.gz"
+grails_install: /opt/grails
+grails_install_latest: "{{ grails_install }}/latest"
+grails_install_target: "{{ grails_install }}/grails-{{ grails_version }}"

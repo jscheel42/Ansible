@@ -1,0 +1,65 @@
+---
+
+## CHECK VERSION AND/OR EXISTANCE OF ARTIFACTORY ON TARGET SERVER
+
+- name: read version from file on server
+  shell: cat {{ artifactory_version_file }}
+  register: artifactory_version_cat
+  ignore_errors: yes
+  changed_when: False
+  tags: artifactory
+
+## REMOVE EXISTING INSTALLATION IF THE VERSION CHANGES
+
+- name: remove existing artifactory installation
+  shell: bash -lc "mv {{ artifactory_war }} /tmp/artifactory-deleted.war"
+  when: artifactory_version_file_data != "" and artifactory_version_file_data != "{{ artifactory_version }}"
+  tags: artifactory
+
+- name: wait for autodeploy to remove artifactory tomcat folder
+  wait_for: path={{ artifactory_deploy }} state=absent delay=20
+  when: artifactory_version_file_data != "" and artifactory_version_file_data != "{{ artifactory_version }}"
+  tags: artifactory
+
+## INSTALL ARTIFACTORY IF THE REQUESTED VERSION DOES NOT ALREADY EXIST
+
+- name: download artifactory zip
+  get_url: url={{ artifactory_url }} dest={{ artifactory_zip }} owner={{ tomcat_user }} # group={{ tomcat_user }}
+  when: artifactory_version_file_data != "{{ artifactory_version }}"
+  tags: artifactory
+
+- name: unarchive the zip file
+  unarchive: src={{ artifactory_zip }} dest=/tmp creates={{ artifactory_unzipped_war }} owner={{ tomcat_user }} copy=no # group={{ tomcat_user }}
+  when: artifactory_version_file_data != "{{ artifactory_version }}"
+  tags: artifactory
+
+- name: move artifactory.war from unzipped location to tomcat webapps
+  shell: creates={{ artifactory_war }} bash -lc "cp {{ artifactory_unzipped_war }} {{ artifactory_war }}"
+  when: artifactory_version_file_data != "{{ artifactory_version }}"
+  register: artifactory_installed
+  notify: restart tomcat
+  tags: artifactory
+
+- name: wait for autodeploy to setup the artifactory directory
+  wait_for: path={{ artifactory_deploy }} state=present delay=60
+  when: artifactory_installed|changed
+  notify: restart tomcat
+  tags: artifactory
+
+- name: write a new artifactory-version file if an installation occured
+  template: src=artifactory-version.j2 dest={{ artifactory_version_file }} owner={{ tomcat_user }} # group={{ tomcat_user }}
+  when: artifactory_installed|changed
+  notify: restart tomcat
+  tags: artifactory
+
+- name: set artifactory as root context on tomcat server
+  lineinfile:
+    line: '<Context path="" docBase="artifactory" debug="0" reloadable="true"></Context>'
+    insertbefore: "</Host>"
+    dest: "{{ tomcat_conf_server }}"
+  notify: restart tomcat
+  tags: artifactory
+
+# Reasoning for frequent tomcat restart notifies:
+# If the root context app is replaced, it looks like tomcat needs a restart to load the conf/server.xml
+# and set the new version of the root application to use the root context

@@ -1,0 +1,40 @@
+---
+
+  # Most steps are skipped if a current installation of the requested version already exists
+
+- name: read version from file on server
+  shell: cat {{ eclipse_version_file }}
+  register: eclipse_version_cat
+  ignore_errors: yes
+  changed_when: False
+  tags: eclipse
+
+- name: create install directory
+  file: path={{ eclipse_install_dir }} state=directory
+  tags: eclipse
+
+- name: download eclipse tar file
+  get_url: url={{ eclipse_url }} dest={{ eclipse_archive }}
+  when: eclipse_version_file_data != "{{ eclipse_version }}"
+  tags: eclipse
+
+- name: extract eclipse tar file
+  unarchive: src={{ eclipse_archive }} dest={{ eclipse_install_dir }} copy=no
+  when: eclipse_version_file_data != "{{ eclipse_version }}"
+  tags: eclipse
+
+- name: set owner of eclipse directory
+  file: path={{ eclipse_install_dir }} owner={{ eclipse_user }} recurse=yes state=directory # group={{ eclipse_user }}
+  tags: eclipse
+
+- name: setup executable in /usr/bin
+  template: src=eclipse.j2 dest=/usr/bin/eclipse mode=0755
+  tags: eclipse
+
+- name: setup desktop icon for eclipse
+  template: src=eclipse.desktop.j2 dest=/usr/share/applications/eclipse.desktop
+  tags: eclipse
+
+- name: write version file
+  template: src=eclipse_version.j2 dest={{ eclipse_version_file }}
+  tags: eclipse

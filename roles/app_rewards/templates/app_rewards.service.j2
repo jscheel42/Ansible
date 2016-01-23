@@ -1,0 +1,11 @@
+[Unit]
+Description=App Rewards Service
+After=syslog.target
+After=network.target
+
+[Service]
+User={{ app_rewards_user }}
+ExecStart={{ java8_install_latest }}/bin/java -jar {{ app_rewards_jar }}
+
+[Install]
+WantedBy=multi-user.target

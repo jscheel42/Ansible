@@ -1,0 +1,6 @@
+androidstudio_install_dir: /opt/androidstudio
+androidstudio_user: "{{ linux_user }}"
+
+# URL and version likely to need simultaneous updates due to google url structure
+androidstudio_version: 1.4.1
+androidstudio_url: https://dl.google.com/dl/android/studio/ide-zips/1.4.1.0/android-studio-ide-141.2343393-linux.zip

@@ -1,0 +1,13 @@
+---
+
+allow_duplicates: yes
+
+dependencies:
+  - java8
+  - role: bash
+    bash_global: "yes"
+    bash_line: "'export PATH=$GRAILS_HOME/bin:$PATH'"
+  - role: bash
+    bash_global: "yes"
+    bash_insert_before: ^.*GRAILS_HOME/bin.*$
+    bash_line: "'export GRAILS_HOME={{ grails_install_latest }}'"

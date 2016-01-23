@@ -1,0 +1,5 @@
+netbeans_tmp_dir: /tmp/netbeans
+netbeans_sh: "{{ netbeans_tmp_dir }}/netbeans-{{ netbeans_version }}-javaee-linux.sh"
+netbeans_state: "{{ netbeans_tmp_dir }}/state.xml"
+netbeans_url: "http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-{{ netbeans_version }}-javaee-linux.sh"
+netbeans_exec: "{{ netbeans_install_dir }}/bin/netbeans"

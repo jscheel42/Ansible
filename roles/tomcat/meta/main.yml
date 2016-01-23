@@ -1,0 +1,20 @@
+---
+
+dependencies:
+  - java8
+  - role: firewall
+    tcp_ports_allow:
+      - 80
+      - 443
+      - 8080
+      - 8181
+    tcp_ports_forward:
+      - { from: "80", to: "8080"}
+      - { from: "443", to: "8181"}
+  - role: ssh-keys
+    linux_user: tomcat
+
+  # - role: authorized_keys
+  #   linux_user: tomcat
+  #   auth_key_list:
+  #     - "{{ ssh_pubkey_tomcat_jenkins }}"

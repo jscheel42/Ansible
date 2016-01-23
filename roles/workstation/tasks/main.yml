@@ -1,0 +1,14 @@
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+- name: setup symbolic link for Ansible to AnsibleVault
+  file: src={{ git_ansible_vault_dir }} dest="{{ git_ansible_dir }}/.vault" mode=0755 state=link
+  tags: workstation

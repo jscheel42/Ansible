@@ -1,0 +1,13 @@
+---
+
+- name: set swappiness default
+  template:
+    src: swappiness.conf.j2
+    dest: /etc/sysctl.d/swappiness.conf
+  register: swappiness_update
+  tags: swappiness
+
+- name: set swappniness current setting if value changed
+  shell: bash -lc "echo {{ swappiness_value }} > /proc/sys/vm/swappiness"
+  when: swappiness_update|changed
+  tags: swappiness

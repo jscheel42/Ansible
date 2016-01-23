@@ -1,0 +1,34 @@
+---
+
+- name: remove apache2 if present
+  yum: name={{ item }} state=absent
+  with_items:
+    - apache
+    - apache2
+  tags: glassfish
+
+- name: add glassfishadm group
+  group: name=glassfishadm
+  tags: glassfish
+
+- name: add jscheel to glassfishadm group
+  user: name=jscheel groups="{{ groups_admin_redhat }},glassfishadm"
+  tags: glassfish
+
+- name: setup port forwarding in firewalld
+  shell: "{{ item }}"
+  with_items:
+    - "firewall-cmd --zone=public --add-forward-port=port=80:proto=tcp:toport=8080 --permanent"
+    - "firewall-cmd --zone=public --add-forward-port=port=443:proto=tcp:toport=8181 --permanent"
+    - "firewall-cmd --reload"
+  tags: glassfish
+
+- name: add systemd service file
+  template: src=glassfish.service.j2 dest=/etc/systemd/system/glassfish.service owner=root group=root
+  register: glassfish_systemd_update
+  tags: glassfish
+
+- name: reload systemd config to make unit file available
+  shell: systemctl daemon-reload
+  when: glassfish_systemd_update|changed
+  tags: glassfish

@@ -1,0 +1,9 @@
+---
+
+- name: remove openjdk
+  yum: name=*openjdk* state=absent
+  tags: java8
+
+- name: install wget for java8 download
+  yum: name=wget state=present
+  tags: java8

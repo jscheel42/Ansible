@@ -1,0 +1,4 @@
+sublime_install_dir: /opt/sublime
+# sublime doesnt have a consistent url to specify version, using direct link in vars instead
+# sublime_version: 2.0.2
+sublime_user: "{{ linux_user }}"

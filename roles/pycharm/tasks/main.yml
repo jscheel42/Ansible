@@ -1,0 +1,62 @@
+---
+
+  # Most steps are skipped if a current installation of the requested version already exists
+
+- name: read version from file on server
+  shell: cat {{ pycharm_version_file }}
+  register: pycharm_version_cat
+  ignore_errors: yes
+  changed_when: False
+  tags: pycharm
+
+- name: create install directory
+  file: path={{ pycharm_install_dir }} state=directory
+  tags: pycharm
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ pycharm_tmp_dir }}"
+  when: pycharm_version_file_data != "{{ pycharm_version }}"
+  tags: pycharm
+
+- name: download pycharm tar file
+  get_url: url={{ pycharm_url }} dest={{ pycharm_archive }}
+  when: pycharm_version_file_data != "{{ pycharm_version }}"
+  tags: pycharm
+
+- name: extract pycharm tar file
+  unarchive: src={{ pycharm_archive }} dest={{ pycharm_tmp_dir }} copy=no
+  when: pycharm_version_file_data != "{{ pycharm_version }}"
+  tags: pycharm
+
+- name: move pycharm folder to standard location
+  shell: cp -r {{ pycharm_tmp_dir }}/*/* {{ pycharm_install_dir }}/
+  when: pycharm_version_file_data != "{{ pycharm_version }}"
+  tags: pycharm
+
+- name: set current user as owner of pycharm directory
+  file: path={{ pycharm_install_dir }} owner={{ pycharm_user }} recurse=yes state=directory # group={{ pycharm_user }}
+  tags: pycharm
+
+#- name: setup executable in /usr/bin
+#  template: src=pycharm.j2 dest=/usr/bin/pycharm mode=0755
+#  tags: pycharm
+
+- name: add symbolic link to /usr/bin
+  file:
+    src: "{{ pycharm_install_dir }}/bin/pycharm.sh"
+    dest: /usr/bin/pycharm
+    state: link
+#    force: yes
+  tags: pycharm
+
+- name: setup desktop icon for pycharm
+  template:
+    src: pycharm.desktop.j2
+    dest: /usr/share/applications/pycharm.desktop
+  tags: pycharm
+
+- name: write version file
+  template: src=pycharm_version.j2 dest={{ pycharm_version_file }}
+  tags: pycharm

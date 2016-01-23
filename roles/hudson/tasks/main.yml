@@ -1,0 +1,55 @@
+---
+
+## CHECK VERSION AND/OR EXISTANCE OF HUDSON ON TARGET SERVER
+
+- name: read version from file on server
+  shell: cat {{ hudson_version_file }}
+  register: hudson_version_cat
+  ignore_errors: yes
+  changed_when: False
+  tags: hudson
+
+## REMOVE EXISTING INSTALLATION IF THE VERSION CHANGES
+
+- name: remove existing hudson installation if requested version differs from installed version
+  shell: bash -lc "mv {{ hudson_war }} /tmp/hudson-deleted.war"
+  when: hudson_version_file_data != "" and hudson_version_file_data != "{{ hudson_version }}"
+  tags: hudson
+
+- name: wait for autodeploy to remove hudson tomcat folder if requested version differs from installed version
+  wait_for: path={{ hudson_deploy }} state=absent delay=20
+  when: hudson_version_file_data != "" and hudson_version_file_data != "{{ hudson_version }}"
+  tags: hudson
+
+## INSTALL HUDSON IF THE REQUESTED VERSION DOES NOT ALREADY EXIST
+
+- name: download war to webapps directory
+  get_url: url={{ hudson_url }} dest={{ hudson_war }} owner={{ tomcat_user }} # group={{ tomcat_user }}
+  when: hudson_version_file_data != "{{ hudson_version }}"
+  register: hudson_installed
+  notify: restart tomcat
+  tags: hudson
+
+- name: wait for autodeploy to setup the hudson directory
+  wait_for: path={{ hudson_deploy }} state=present delay=60
+  when: hudson_installed|changed
+  notify: restart tomcat
+  tags: hudson
+
+- name: write a new hudson-version file if an installation occured
+  template: src=hudson-version.j2 dest={{ hudson_version_file }} owner={{ tomcat_user }} # group={{ tomcat_user }}
+  when: hudson_installed|changed
+  notify: restart tomcat
+  tags: hudson
+
+- name: set hudson as root context on tomcat server
+  lineinfile:
+    line: '<Context path="" docBase="hudson" debug="0" reloadable="true"></Context>'
+    insertbefore: "</Host>"
+    dest: "{{ tomcat_conf_server }}"
+  notify: restart tomcat
+  tags: hudson
+
+# Reasoning for frequent tomcat restart notifies:
+# If the root context app is replaced, it looks like tomcat needs a restart to load the conf/server.xml
+# and set the new version of the root application to use the root context

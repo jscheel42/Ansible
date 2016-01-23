@@ -1,0 +1,5 @@
+---
+
+- name: ensure git is installed
+  yum: name=git state=present
+  tags: git

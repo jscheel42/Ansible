@@ -1,0 +1,7 @@
+---
+
+jenkins_url: "http://mirrors.jenkins-ci.org/war-stable/{{ jenkins_version }}/jenkins.war"
+jenkins_war: "{{ tomcat_install_latest }}/webapps/jenkins.war"
+jenkins_deploy: "{{ tomcat_install_latest }}/webapps/jenkins"
+jenkins_version_file: "{{ tomcat_install_latest }}/webapps/jenkins-version"
+jenkins_version_file_data: "{{ jenkins_version_cat.stdout }}"

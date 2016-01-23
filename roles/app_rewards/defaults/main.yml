@@ -1,0 +1,8 @@
+---
+
+app_rewards_user: "{{ app_user }}"
+app_rewards_home: /home/{{ app_rewards_user }}
+app_rewards_dir: "{{ app_rewards_home }}/app_rewards"
+app_rewards_jar: "{{ app_rewards_dir }}/rewards.jar"
+
+app_rewards_port: 8080

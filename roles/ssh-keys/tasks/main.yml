@@ -1,0 +1,17 @@
+---
+
+- name: ensure specified user exists
+  user: name={{ ssh_user }} system=yes shell=/bin/bash
+  tags: maven3
+
+- name: setup .ssh directory
+  file: path={{ ssh_dir }} state=directory mode=0700 owner={{ ssh_user }}
+  tags: ssh-keys
+
+- name: generate ssh keys for {{ ssh_user }}
+  user: name={{ ssh_user }} generate_ssh_key=yes
+  tags: ssh-keys
+
+- name: copy config file
+  template: src=config.j2 dest={{ ssh_config }} mode=0644 owner={{ ssh_user }}
+  tags: ssh-keys

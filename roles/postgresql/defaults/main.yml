@@ -1,0 +1,14 @@
+---
+
+postgresql_dir: "/data/pg-{{ postgresql_version }}"
+postgresql_port: 5432
+postgresql_listen_addr: "*"
+postgresql_remote_allow: "yes"
+postgresql_remote_domain: "all"
+
+postgresql_users: []
+
+postgresql_admins:
+  - {name: "{{ linux_user }}", perms: "SUPERUSER,LOGIN", password: "{{ secret_postgresql_password_default }}" }
+
+postgresql_databases: []

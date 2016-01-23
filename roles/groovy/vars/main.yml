@@ -1,0 +1,9 @@
+---
+
+groovy_version: 2.4.5
+groovy_url: "https://bintray.com/artifact/download/groovy/maven/apache-groovy-sdk-{{ groovy_version }}.zip"
+groovy_download_folder: /usr/local/src
+groovy_archive: "{{ groovy_download_folder }}/groovy-{{ groovy_version }}-linux-x64.tar.gz"
+groovy_install: /opt/groovy
+groovy_install_latest: "{{ groovy_install }}/latest"
+groovy_install_target: "{{ groovy_install }}/groovy-{{ groovy_version }}"

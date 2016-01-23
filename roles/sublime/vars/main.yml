@@ -1,0 +1,4 @@
+sublime_tmp_dir: /tmp/sublime
+sublime_archive: /tmp/sublime.tar.gz
+sublime_url: http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2%20x64.tar.bz2
+sublime_exec: "{{ sublime_install_dir }}/sublime_text"

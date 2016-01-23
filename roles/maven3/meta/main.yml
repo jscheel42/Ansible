@@ -1,0 +1,13 @@
+---
+
+allow_duplicates: yes
+
+dependencies:
+  - java8
+  - role: bash
+    bash_global: "yes"
+    bash_line: "'export PATH=$MAVEN_HOME/bin:$PATH'"
+  - role: bash
+    bash_global: "yes"
+    bash_insert_before: ^.*MAVEN_HOME/bin.*$
+    bash_line: "'export MAVEN_HOME={{ maven3_install_default }}'"

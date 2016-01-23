@@ -1,0 +1,28 @@
+---
+
+- name: add landscape-server ppa
+  apt_repository: repo="ppa:landscape/15.01" state=present
+  tags: landscape-server
+
+- name: install landscape-server
+  apt: name=landscape-server-quickstart state=present
+  tags: landscape-server
+
+- name: upload ssl key for landscape
+  copy: src=files/{{ environment_name }}_landscape_server_ca.crt dest=/etc/ssl/certs/landscape_server_ca.crt
+  notify: restart landscape server services
+  tags: landscape-client
+
+- name: ensure landscape-server services are running
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - landscape-appserver
+    - landscape-msgserver
+    - landscape-pingserver
+    - landscape-job-handler
+    - landscape-async-frontend
+  tags: landscape-server
+
+- name: copy landscape-server ssl cert to local so that landscape-client can use it
+  fetch: src=/etc/ssl/certs/landscape_server_ca.crt dest=files/{{ environment_name }}_landscape_server_ca.crt fail_on_missing=yes flat=yes
+  tags: landscape-server

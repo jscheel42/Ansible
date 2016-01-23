@@ -1,0 +1,4 @@
+eclipse_tmp_dir: /tmp/eclipse-{{ eclipse_version }}
+eclipse_archive: /tmp/eclipse-{{ eclipse_version }}.tar.gz
+eclipse_version_file: "{{ eclipse_install_dir }}/eclipse/eclipse_version"
+eclipse_version_file_data: "{{ eclipse_version_cat.stdout }}"

@@ -1,0 +1,30 @@
+
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ groovy_install }}"
+  tags: groovy
+
+- name: download groovy archive
+  get_url: url={{ groovy_url }} dest={{ groovy_archive }}
+  tags: groovy
+
+- name: extract archive to install directory
+  unarchive: src={{ groovy_archive }} dest={{ groovy_install }} copy=no mode=0755 owner=root group=root creates="{{ groovy_install_target }}"
+  tags: groovy
+
+- name: create latest symbolic link for groovy
+  file: src={{ groovy_install_target }} dest={{ groovy_install_latest }} mode=0755 state=link
+  tags: groovy
+

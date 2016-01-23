@@ -1,0 +1,9 @@
+# The "-b27" in the url sometimes changes with versions and will need to be updated. Downloads fail without it, otherwise unsure of purpose.
+maven3_url: http://apache.mirrors.pair.com/maven/maven-3/{{ maven3_version }}/binaries/apache-maven-{{ maven3_version }}-bin.tar.gz
+maven3_download_folder: /usr/local/src
+maven3_archive: "{{ maven3_download_folder }}/maven-{{ maven3_version }}-linux-x64.tar.gz"
+maven3_install: /opt/maven3
+maven3_install_default: "{{ maven3_install }}/default"
+maven3_install_latest: "{{ maven3_install }}/latest{{ maven3_version_major }}"
+maven3_install_target: "{{ maven3_install }}/apache-maven-{{ maven3_version }}"
+maven3_artifactory_base_url: "http://dev-artifactory.homenet:8080"

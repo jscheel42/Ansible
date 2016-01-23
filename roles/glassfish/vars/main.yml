@@ -1,0 +1,11 @@
+glassfish_home: /home/glassfish
+glassfish_version: 4.1
+glassfish_src: "{{ glassfish_home }}/src"
+glassfish_zip: "{{ glassfish_src }}/glassfish-{{ glassfish_version }}.zip"
+glassfish_url: "http://download.oracle.com/glassfish/{{ glassfish_version }}/release/glassfish-{{ glassfish_version }}.zip"
+glassfish_path: "{{ glassfish_home }}/latest"
+glassfish_service: /etc/init.d/glassfish
+glassfish_admin_pw_store: "{{ glassfish_home }}/.gfclient/pass"
+glassfish_master_pw_store: "{{ glassfish_path }}/glassfish/domains/domain1/master-password"
+glassfish_setup_script_1: "{{ glassfish_home }}/setup-glassfish-1.sh"
+glassfish_setup_script_2: "{{ glassfish_home }}/setup-glassfish-2.sh"

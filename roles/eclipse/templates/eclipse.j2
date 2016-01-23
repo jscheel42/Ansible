@@ -1,0 +1,7 @@
+#!/bin/sh
+export ECLIPSE_HOME="{{ eclipse_install_dir }}/eclipse"
+export JAVA_HOME={{ java8_install_latest }}
+export PATH=$JAVA_HOME/bin:$PATH
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on" 
+
+$ECLIPSE_HOME/eclipse $*

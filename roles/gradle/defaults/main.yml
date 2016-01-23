@@ -1,0 +1,5 @@
+gradle_version: "2.10"
+gradle_user: "{{ linux_user }}"
+# gradle_m2_dir: /home/{{gradle_user}}/.m2
+# gradle_default: "false"
+# gradle_latest: "false"

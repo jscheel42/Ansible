@@ -1,0 +1,5 @@
+---
+
+dependencies:
+  - java8
+  - tomcat

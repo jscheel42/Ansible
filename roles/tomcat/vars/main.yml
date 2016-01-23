@@ -1,0 +1,8 @@
+---
+
+tomcat_url: http://apache.osuosl.org/tomcat/tomcat-8/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz
+tomcat_download_folder: /usr/local/src
+tomcat_archive: "{{ tomcat_download_folder }}/apache-tomcat-{{ tomcat_version }}-linux-x64.tar.gz"
+tomcat_install_latest: "{{ tomcat_install }}/latest"
+tomcat_install_target: "{{ tomcat_install }}/apache-tomcat-{{ tomcat_version }}"
+tomcat_conf_server: "{{ tomcat_install_latest }}/conf/server.xml"

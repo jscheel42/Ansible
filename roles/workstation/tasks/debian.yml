@@ -1,0 +1,55 @@
+---
+
+# - name: install ppas
+#   apt_repository: repo={{ item }} state=present
+#   with_items:
+#     # - ppa:webupd8team/atom
+#     # - ppa:libreoffice/ppa
+#     - ppa:ansible/ansible
+#   tags: workstation5
+
+- name: add spotify apt key
+  apt_key: keyserver=keyserver.ubuntu.com id=D2C19886
+  register: spotify
+  tags: workstation
+
+- name: add spotify repo
+  template: src=spotify.list.j2 dest=/etc/apt/sources.list.d/spotify.list
+  tags: workstation
+
+- name: add dropbox apt key
+  apt_key: keyserver=pgp.mit.edu id=1C61A2656FB57B7E4DE0F4C1FC918B335044912E
+  tags: workstation
+
+- name: add dropbox repo
+  template: src=dropbox.list.j2 dest=/etc/apt/sources.list.d/dropbox.list
+  tags: workstation
+
+- name: update the cache
+  apt: update_cache=yes
+  tags: workstation
+
+- name: install workstation packages
+  apt: name={{ item }} state=present
+  with_items:
+    - amarok
+    - ansible
+    # - atom
+    - build-essential
+    # - chromium-browser
+    - deja-dup
+    - dropbox
+    - gawk
+    - git
+    - g++
+    - ubuntu-restricted-extras
+    # - libreoffice
+    # - pepperflashplugin-nonfree
+    - spotify-client
+  tags: workstation
+
+- name: remove unwanted packages
+  apt: name={{ item }} state=absent
+  with_items:
+    - flashplugin-installer
+  tags: workstation

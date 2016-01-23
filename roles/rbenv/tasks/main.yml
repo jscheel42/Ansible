@@ -1,0 +1,9 @@
+---
+
+- name: create plugins directory
+  file: path="{{ rbenv_checkout_main }}/plugins" state=directory owner={{ rbenv_user }} # group={{ rbenv_user }}
+  tags: rbenv
+
+- name: create symbolic link for ruby-build
+  file: src="{{ rbenv_checkout_ruby_build }}" dest="{{ rbenv_link_ruby_build }}" mode=0755 state=link owner={{ rbenv_user }} # group={{ rbenv_user }}
+  tags: rbenv

@@ -1,0 +1,6 @@
+play_version: "2.4.6"
+activator_version: 1.3.7
+play_user: "{{ linux_user }}"
+# play_m2_dir: /home/{{play_user}}/.m2
+# play_default: "false"
+# play_latest: "false"

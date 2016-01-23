@@ -1,0 +1,43 @@
+---
+
+  # Only configuration is done if an install already exists
+
+- name: create install directory
+  file: path={{ sublime_install_dir }} state=directory
+  register: sublime_install
+  tags: sublime
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ sublime_tmp_dir }}"
+  when: sublime_install|changed
+  tags: sublime
+
+- name: download sublime tar file
+  get_url: url={{ sublime_url }} dest={{ sublime_archive }}
+  when: sublime_install|changed
+  tags: sublime
+
+- name: extract sublime tar file
+  unarchive: src={{ sublime_archive }} dest={{ sublime_tmp_dir }} copy=no
+  when: sublime_install|changed
+  tags: sublime
+
+- name: move sublime folder to standard location
+  shell: mv {{ sublime_tmp_dir }}/*/* {{ sublime_install_dir }}/
+  when: sublime_install|changed
+  tags: sublime
+
+- name: set current user as owner of sublime directory
+  file: path={{ sublime_install_dir }} owner={{ sublime_user }} recurse=yes state=directory # group={{ sublime_user }}
+  when: sublime_install|changed
+  tags: sublime
+
+- name: setup executable in /usr/bin
+  file: src="{{ sublime_exec }}" dest=/usr/bin/sublime mode=0755 state=link
+  tags: sublime
+
+- name: setup desktop icon for sublime
+  template: src=sublime.desktop.j2 dest=/usr/share/applications/sublime.desktop
+  tags: sublime

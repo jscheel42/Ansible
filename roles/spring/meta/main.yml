@@ -1,0 +1,13 @@
+---
+
+allow_duplicates: yes
+
+dependencies:
+  - groovy
+  - role: bash
+    bash_global: "yes"
+    bash_line: "'export PATH=$spring_HOME/bin:$PATH'"
+  - role: bash
+    bash_global: "yes"
+    bash_insert_before: ^.*spring_HOME/bin.*$
+    bash_line: "'export spring_HOME={{ spring_install_latest }}'"

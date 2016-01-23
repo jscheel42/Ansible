@@ -1,0 +1,31 @@
+---
+
+- name: install ufw package
+  apt: name=ufw state=present
+  tags: firewall
+
+- name: open tcp ports with rule=allow
+  ufw: port={{ item }} proto=tcp rule=allow
+  with_items: "{{ tcp_ports_allow }}"
+  notify: reload ufw settings
+  tags: firewall
+
+- name: open tcp ports with rule=limit
+  ufw: port={{ item }} proto=tcp rule=limit
+  with_items: "{{ tcp_ports_limit }}"
+  notify: reload ufw settings
+  tags: firewall
+
+- name: allow outgoing traffic
+  ufw: direction=outgoing policy=allow
+  notify: reload ufw settings
+  tags: firewall
+
+- name: restrict incoming traffic
+  ufw: direction=incoming policy=deny
+  notify: reload ufw settings
+  tags: firewall
+
+- name: enable ufw
+  ufw: state=enabled
+  tags: firewall

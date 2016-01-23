@@ -1,0 +1,3 @@
+pycharm_install_dir: /opt/pycharm
+pycharm_version: 5.0.2
+pycharm_user: "{{ linux_user }}"

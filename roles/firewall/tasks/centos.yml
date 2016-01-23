@@ -1,0 +1,42 @@
+---
+
+- name: install firewalld package
+  yum: name=firewalld state=present
+  tags: firewall
+
+- name: enable firewalld
+  service: name=firewalld state=started
+  tags: firewall
+
+- name: open tcp ports
+  firewalld: port="{{ item }}/tcp" zone=public permanent=yes state=enabled
+  with_items: "{{ tcp_ports_allow }}"
+  notify: reload firewalld settings
+  tags: firewall
+
+# Open port for now, can use rich rules to setup a limited port once I learn more about firewalld
+- name: open tcp ports with a limited ruleset
+  firewalld: port="{{ item }}/tcp" zone=public permanent=yes state=enabled
+  with_items: "{{ tcp_ports_limit }}"
+  notify: reload firewalld settings
+  tags: firewall
+
+# firewalld module currently doesn't support port forwarding.
+# The below sections stand in for natively supported port forwarding, and can be replaced once it is supported. 
+- name: add directory for port forward tracking
+  file: path={{ firewall_port_forward_tracking_dir }} state=directory
+  tags: firewall
+
+- name: forward ports in firewalld
+  shell: bash -lc "firewall-cmd --zone=public --add-forward-port=port={{ item.from }}:proto=tcp:toport={{ item.to }} --permanent && touch {{ firewall_port_forward_tracking_dir }}/from_{{ item.from }}_to_{{ item.to }}"
+  args:
+    creates: "{{ firewall_port_forward_tracking_dir }}/from_{{ item.from }}_to_{{ item.to }}"
+  with_items: tcp_ports_forward
+  when: item.from != [] and item.to != []
+  register: firewall_ports_forwarded
+  tags: firewall
+
+- name: reload firewall config to load port forwarding
+  shell: "firewall-cmd --reload"
+  when: firewall_ports_forwarded|changed
+  tags: firewall

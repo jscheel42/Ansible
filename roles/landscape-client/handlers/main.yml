@@ -1,0 +1,9 @@
+---
+
+- name: landscape client update config restart
+  shell: landscape-config --silent
+  tags: landscape-client
+
+# - name: restart landscape-client service
+#   service: name=landscape-client state=restarted
+#   tags: landscape-client

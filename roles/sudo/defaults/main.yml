@@ -1,0 +1,4 @@
+---
+
+sudo_admin_list:
+  - "{{ linux_user }}"

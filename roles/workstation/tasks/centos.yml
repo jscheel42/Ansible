@@ -1,0 +1,22 @@
+---
+
+- name: install workstation packages
+  yum: name={{ item }} state=present
+  with_items:
+    - amarok
+    - ansible
+    # - chromium-browser
+    - deja-dup
+    # - dropbox
+    - ffmpeg
+    - gawk
+    - gcc
+    - gcc-c++
+    - git
+    # - kernel-ml # mainline kernel from elrepo
+    - make
+    - smplayer
+    - vlc
+    # - pepperflashplugin-nonfree
+    # - spotify-client
+  tags: workstation

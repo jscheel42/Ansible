@@ -1,0 +1,8 @@
+# The "-b27" in the url sometimes changes with versions and will need to be updated. Downloads fail without it, otherwise unsure of purpose.
+gradle_url: http://services.gradle.org/distributions/gradle-{{ gradle_version }}-bin.zip
+gradle_download_folder: /usr/local/src
+gradle_archive: "{{ gradle_download_folder }}/maven-{{ gradle_version }}-linux-x64.tar.gz"
+gradle_install: /opt/gradle
+gradle_install_latest: "{{ gradle_install }}/latest"
+gradle_install_target: "{{ gradle_install }}/gradle-{{ gradle_version }}"
+# gradle_artifactory_base_url: "http://dev-artifactory.homenet:8080"

@@ -1,0 +1,7 @@
+#!/bin/sh
+export IDEA_HOME="{{ intellij_install_dir }}/bin"
+export JAVA_HOME={{ java8_install_latest }}
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on" 
+
+
+$IDEA_HOME/idea.sh $*

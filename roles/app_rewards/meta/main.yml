@@ -1,0 +1,11 @@
+---
+
+dependencies:
+  - role: firewall
+    tcp_ports_allow:
+      - "{{ app_rewards_port }}"
+  - java8
+  - role: postgresql
+    postgresql_users: "{{ postgresql_rewards_users }}"
+    postgresql_databases: "{{ postgresql_rewards_databases }}"
+  - app

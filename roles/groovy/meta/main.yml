@@ -1,0 +1,13 @@
+---
+
+allow_duplicates: yes
+
+dependencies:
+  - java8
+  - role: bash
+    bash_global: "yes"
+    bash_line: "'export PATH=$GROOVY_HOME/bin:$PATH'"
+  - role: bash
+    bash_global: "yes"
+    bash_insert_before: ^.*GROOVY_HOME/bin.*$
+    bash_line: "'export GROOVY_HOME={{ groovy_install_latest }}'"

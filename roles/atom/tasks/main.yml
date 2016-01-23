@@ -1,0 +1,25 @@
+
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+- name: download atom rpm
+  get_url: 
+    url: "{{ atom_url }}"
+    dest: "{{ atom_rpm }}"
+  register: atom_downloaded
+  tags: atom
+
+- name: install atom from rpm if download was performed
+  zypper:
+    name: "{{ atom_rpm }}"
+  when: atom_downloaded|changed
+  tags: atom
+

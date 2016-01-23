@@ -1,0 +1,6 @@
+---
+
+- name: update all apt packages
+  apt: upgrade=yes update_cache=yes
+  when: update_all_packages == "yes"
+  tags: update

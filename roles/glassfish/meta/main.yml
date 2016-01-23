@@ -1,0 +1,24 @@
+---
+
+dependencies:
+  - java8
+  - role: firewall
+    tcp_ports_allow:
+      - 80
+      - 443
+      - 3700
+      - 3820
+      - 3920
+      - 4848
+      - 6666
+      - 7676
+      - 8080
+      - 8181
+      - 8686
+      - 9009
+      - 9090
+      - 9200
+  - role: authorized_keys
+    linux_user: glassfish
+    auth_key_list:
+      - "{{ ssh_pubkey_hudson_hudson }}"

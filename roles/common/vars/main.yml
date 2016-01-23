@@ -1,0 +1,26 @@
+---
+
+common_package_list_centos:
+  - curl
+  - fail2ban
+  - git
+  - openssh-server
+  - unzip
+  - vim
+
+common_package_list_debian:
+  - aptitude
+  - curl
+  - fail2ban
+  - git
+  - openssh-server
+  - unzip
+  - vim
+
+common_package_list_suse:
+  - curl
+  - fail2ban
+  - git
+  - openssh
+  - unzip
+  - vim

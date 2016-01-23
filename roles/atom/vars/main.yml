@@ -1,0 +1,5 @@
+---
+
+atom_url: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom.x86_64.rpm"
+atom_download_folder: /usr/local/src
+atom_rpm: "{{ atom_download_folder }}/atom-{{ atom_version }}.rpm"

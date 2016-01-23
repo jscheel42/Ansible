@@ -1,0 +1,6 @@
+---
+
+allow_duplicates: yes
+
+dependencies:
+  - { role: ssh-keys, ssh_user: "{{ git_user }}" }

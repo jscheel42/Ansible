@@ -1,0 +1,7 @@
+maven3_version_major: 3.3
+maven3_version_minor: 3
+maven3_version: "{{ maven3_version_major }}.{{ maven3_version_minor }}"
+maven3_user: "{{ linux_user }}"
+maven3_m2_dir: /home/{{maven3_user}}/.m2
+maven3_default: "false"
+maven3_latest: "false"

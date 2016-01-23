@@ -1,0 +1,11 @@
+---
+
+bash_user: "{{ linux_user }}"
+bash_home: "/home/{{ bash_user }}"
+bash_line: ""
+bash_insert_before: ""
+bash_files:
+  - "{{ bash_home }}/.bashrc"
+  - "{{ bash_home }}/.bash_profile"
+  - "{{ bash_home }}/.profile"
+bash_global: "no"

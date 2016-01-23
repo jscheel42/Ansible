@@ -1,0 +1,28 @@
+---
+
+ssh_pubkey_jscheel_serenity: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIhZXo+qus/FhmGApqzqaIjyJNQ4mEzM33MIFDza3e4cOodCKsf1bUKjy5ImnzkEErHU6Bow8JYwvfb3TW9GNVUHRWKrW/67tG5Rk+eWBzabX8daPQuY0WMpR7cfPoxxFX0ipx76fjhhRwKboeN3Z8nfrnVQ2iBhDoXnn/CV9/sNExxFPW968ZGufuT4QcM7Gm9icKRfbd6PgR2R80qtHkQQ0eSoVmuiAcl8wZ9mvfxG+qL6sbgHEwWOtGIOfYP7vAqq2YJ+bsJEpZgvOSyuf1kweLwRxByHo21AVV9TfZSLKVYhGiMg2PwlfhVUU93I9MRE/WbCDookt0LiApG7R/ jscheel@serenity.homenet"
+ssh_pubkey_jscheel_pod: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtddWIJSd+KNlzAJQWRNfFEe5AcbCxRLc1MzG7JS7/B/RZ9k4Y4+1e/+WqVQrtOK3RVxV3SxXKHHjh2vLp1LYn+GG7GSJbtAEnpAvrP1cNgoROUAOu897FvyeAK2n5pz5/j5MDdclZVoDTSPcDYqIyvpcFPGm6rijw21tJT8soZLS/keoGbVl5eTalRgAHmpzwX1Ppr+5KrmpUZxaysdjvLPNL0indg/qCRr6k4mo2Fmx8FpdC9PvxOJgu4YqFW32TXdn/wvrKOVZ2M5wq5X1wzX+7de/wxXS7gtelA5hn/wMvVrulIolkYkLmH6McfSfpyPDim6PDI1zMf0zAO55T jscheel@pod.homenet"
+
+all_vars: "are set"
+groups_admin_debian: sudo
+groups_admin_redhat: wheel
+linux_user: jscheel
+update_all_packages: "no"
+
+postgresql_rewards_users:
+  - { name: "rewards",
+      perms: "LOGIN",
+      password: "{{ secret_postgresql_password_default }}"}
+
+postgresql_rewards_databases:
+  - { name: rewards,
+      owner: rewards }
+
+postgresql_allc_users:
+- { name: "allc",
+    perms: "LOGIN",
+    password: "{{ secret_postgresql_password_allc }}" }
+
+postgresql_allc_databases:
+- { name: allc_dev,
+    owner: allc }

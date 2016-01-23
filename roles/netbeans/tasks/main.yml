@@ -1,0 +1,45 @@
+---
+
+  # Only configuration is done if an install already exists
+
+- name: create install directory
+  file: path={{ netbeans_install_dir }} state=directory owner={{ linux_user }} # group={{ linux_user }}
+  register: netbeans_install
+  tags: netbeans
+
+- name: create required directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ netbeans_tmp_dir }}"
+  when: netbeans_install|changed
+  tags: netbeans
+
+- name: download netbeans install script
+  get_url: url={{ netbeans_url }} dest={{ netbeans_sh }} mode=0755 owner={{ linux_user }} # group={{ linux_user }}
+  when: netbeans_install|changed
+  tags: netbeans
+
+- name: copy state.xml for silent installation
+  template: src=state.xml.j2 dest={{ netbeans_state }} owner={{ linux_user }} # group={{ linux_user }}
+  when: netbeans_install|changed
+  tags: netbeans
+
+- name: install netbeans silently
+  sudo_user: "{{ linux_user }}"
+  shell: bash -lc "{{ netbeans_sh }} --silent --state {{ netbeans_state }}"
+  when: netbeans_install|changed
+  tags: netbeans
+
+- name: set permissions on netbeans installation
+  file: path={{ netbeans_install_dir }} mode=0755 owner="{{ linux_user }}"
+  tags: netbeans
+
+- name: setup executable in /usr/bin
+  file: src="{{ netbeans_exec }}" dest="/usr/bin/netbeans" mode=0755 state=link
+  when: netbeans_install|changed
+  tags: netbeans
+
+- name: setup desktop icon for netbeans
+  template: src=netbeans.desktop.j2 dest=/usr/share/applications/netbeans.desktop
+  when: netbeans_install|changed
+  tags: netbeans

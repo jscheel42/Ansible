@@ -1,0 +1,31 @@
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse" or "openSUSE Leap"
+
+# Ansible seems to put a "sudo" in front of every shell command.  If we want tomcat user to run the command without sudo, we have to...
+# do this bullshit instead of using sudo_user, become_user, etc
+- name: install jruby
+  shell: creates={{ jruby_install }} bash -lc "sudo -i -u {{ jruby_user }} rbenv install jruby-{{ jruby_version }}"
+  register: jruby_installed
+  tags: jruby
+
+- name: set default ruby to jruby
+  shell: "{{ item }}"
+  with_items:
+    - bash -lc "sudo -i -u {{ jruby_user }} rbenv global jruby-{{ jruby_version }}"
+    - bash -lc "sudo -i -u {{ jruby_user }} rbenv local jruby-{{ jruby_version }}"
+  when: jruby_installed|changed
+  tags: jruby
+
+- name: install bundler gem
+  shell: bash -lc "sudo -i -u {{ jruby_user }} gem install {{ item }}"
+  with_items: jruby_gems
+  when: jruby_installed|changed
+  tags: jruby

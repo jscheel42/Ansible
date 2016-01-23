@@ -1,0 +1,6 @@
+intellij_tmp_dir: /tmp/intellij-{{ intellij_version }}
+intellij_archive: /tmp/intellij-{{ intellij_version }}.tar.gz
+intellij_url_c: http://download.jetbrains.com/idea/ideaIC-{{ intellij_version }}.tar.gz
+intellij_url_u: https://download.jetbrains.com/idea/ideaIU-{{ intellij_version }}.tar.gz
+intellij_version_file: "{{ intellij_install_dir }}/intellij_version"
+intellij_version_file_data: "{{ intellij_version_cat.stdout }}"

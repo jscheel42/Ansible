@@ -1,0 +1,79 @@
+---
+
+# - hosts: landscapemasterservers
+#   vars_files:
+#     - .vault/secrets
+#   roles:
+#     - landscape-server
+#     - common
+
+- hosts: all
+  vars_files:
+    - .vault/secrets
+  roles:
+    - common
+
+- hosts: proxyservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - nginx
+
+- hosts: virtualboxservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - virtualbox-guest
+
+- hosts: spacewalkservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - spacewalk-server
+
+- hosts: buildservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - java8
+
+- hosts: buildmasterservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    # - hudson
+    - jenkins
+
+- hosts: artifactoryservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - artifactory
+
+- hosts: appsservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - app_rewards
+
+- hosts: htpc
+  vars_files:
+    - .vault/secrets
+  roles:
+    - { role: firewall, tcp_ports_allow: [5900] }
+
+#############
+# LAPTOP
+#############
+
+- hosts: desktops
+  vars_files:
+    - .vault/secrets
+  roles:
+    - desktop
+
+- hosts: laptops
+  vars_files:
+    - .vault/secrets
+  roles:
+    - laptop

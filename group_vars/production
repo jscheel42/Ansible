@@ -1,0 +1,6 @@
+---
+
+environment_name: production
+
+# Dev and Prod running different PG versions until Linode gets opensuse leap
+postgresql_version: 94

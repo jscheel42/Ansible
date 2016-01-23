@@ -1,0 +1,15 @@
+---
+
+dependencies:
+  - role: ssh-keys
+    linux_user: "{{ app_user }}"
+  - role: authorized_keys
+    linux_user: "{{ app_user }}"
+    auth_key_list:
+      - "{{ ssh_pubkey_tomcat_jenkins }}"
+
+  # - role: jruby
+  #   # jruby_user: "tomcat"
+  #   linux_user: "tomcat"
+  #   jruby_gems:
+  #     - bundler

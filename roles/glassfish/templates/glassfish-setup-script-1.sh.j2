@@ -1,0 +1,112 @@
+#!/bin/bash
+
+echo "default password = changeit"
+until {{ glassfish_path }}/bin/asadmin change-master-password --savemasterpassword=true
+do
+  echo "Try again"
+  sleep 2
+done
+
+echo "default user = admin"
+echo "default password = [blank]"
+until {{ glassfish_path }}/bin/asadmin change-admin-password
+do
+  echo "Try again"
+  sleep 2
+done
+
+until echo "replacing shipped ssl keys with new ones"
+do
+  echo "Try again"
+  sleep 2
+done
+
+until cd {{ glassfish_path }}/glassfish/domains/domain1/config
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -list -keystore keystore.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -delete -alias s1as -keystore keystore.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -delete -alias glassfish-instance -keystore keystore.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -keysize 4096 -genkey -alias myAlias -keyalg RSA -dname "{{ glassfish_ssl_info }}" -validity 3650 -keypass {{ glassfish_master_pw }} -storepass {{ glassfish_master_pw }} -keystore keystore.jks
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -keysize 4096 -genkey -alias s1as -keyalg RSA -dname "{{ glassfish_ssl_info }}" -validity 3650 -keypass {{ glassfish_master_pw }} -storepass {{ glassfish_master_pw }} -keystore keystore.jks
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -keysize 4096 -genkey -alias glassfish-instance -keyalg RSA -dname "{{ glassfish_ssl_info }}" -validity 3650 -keypass {{ glassfish_master_pw }} -storepass {{ glassfish_master_pw }} -keystore keystore.jks
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -list -keystore keystore.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -export -alias glassfish-instance -file glassfish-instance.cert -keystore keystore.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -export -alias s1as -file s1as.cert -keystore keystore.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -delete -alias glassfish-instance -keystore cacerts.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -delete -alias s1as -keystore cacerts.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -import -alias glassfish-instance -file glassfish-instance.cert -keystore cacerts.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until keytool -import -alias s1as -file s1as.cert -keystore cacerts.jks -storepass {{ glassfish_master_pw }}
+do
+  echo "Try again"
+  sleep 2
+done
+
+until rm glassfish-instance.cert s1as.cert
+do
+  echo "Try again"
+  sleep 2
+done

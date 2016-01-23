@@ -1,0 +1,10 @@
+[client]
+log_level = info
+url = {{ landscape_url }}
+ping_url = {{ landscape_ping_url }}
+data_path = /var/lib/landscape/client
+tags = {{ landscape_tags }}
+computer_title = {{ ansible_hostname }}
+access_group = {{ landscape_access_group }}
+account_name = {{ landscape_account_name }}
+ssl_public_key = /etc/landscape/landscape_server_ca.crt

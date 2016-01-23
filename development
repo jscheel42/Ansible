@@ -1,0 +1,83 @@
+#############
+# Virtualboxes
+#############
+
+[virtualboxservers]
+dev-jenkins.homenet
+dev-artifactory.homenet
+dev-apps01.homenet
+
+#############
+# HUDSON / JENKINS
+#############
+
+[buildmasterservers]
+dev-jenkins.homenet
+
+[buildslaveservers]
+dev-jenkins.homenet
+
+[buildservers:children]
+buildmasterservers
+buildslaveservers
+
+
+#############
+# ARTIFACTORY
+#############
+
+[artifactoryservers]
+dev-artifactory.homenet
+
+
+#############
+# APPS
+#############
+
+[appsservers]
+dev-apps01.homenet
+
+#############
+# WORKSTATION
+#############
+
+[laptops]
+# pod.homenet
+pod.homenet ansible_connection=local
+
+[desktops]
+serenity.homenet
+# serenity.homenet ansible_connection=local
+
+[workstations:children]
+laptops
+desktops
+
+#############
+# HTPC
+#############
+
+[htpc]
+htpc.homenet
+
+
+#############
+# GROUP UP
+#############
+
+[servers:children]
+# landscapemasterservers
+# spacewalkservers
+# glassfishservers
+artifactoryservers
+buildservers
+appsservers
+virtualboxservers
+
+[development:children]
+htpc
+servers
+workstations
+
+[all:children]
+development

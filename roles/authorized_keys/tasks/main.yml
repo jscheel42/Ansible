@@ -1,0 +1,10 @@
+---
+
+- name: ensure specified user exists
+  user: name={{ ssh_user }} system=yes shell=/bin/bash
+  tags: maven3
+
+- name: populate authorized ssh keys
+  lineinfile: dest={{ auth_key_file }} create=yes backup=yes owner={{ ssh_user }} state=present line="{{ item }}"
+  with_items: auth_key_list
+  tags: authorized_keys

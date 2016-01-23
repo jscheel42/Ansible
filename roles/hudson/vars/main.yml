@@ -1,0 +1,7 @@
+---
+
+hudson_url: "http://hudson-ci.org/downloads/war/hudson-{{ hudson_version }}.war"
+hudson_war: "{{ tomcat_install_latest }}/webapps/hudson.war"
+hudson_deploy: "{{ tomcat_install_latest }}/webapps/hudson"
+hudson_version_file: "{{ tomcat_install_latest }}/webapps/hudson-version"
+hudson_version_file_data: "{{ hudson_version_cat.stdout }}"

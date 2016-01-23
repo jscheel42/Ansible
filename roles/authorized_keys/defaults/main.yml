@@ -1,0 +1,4 @@
+auth_key_list: []
+auth_key_user: "{{ ssh_user }}"
+auth_key_dir: "{{ ssh_dir }}"
+auth_key_file: "{{ ssh_dir }}/authorized_keys"

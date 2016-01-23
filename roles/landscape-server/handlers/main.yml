@@ -1,0 +1,11 @@
+---
+
+- name: restart landscape server services
+  service: name={{ item }} state=restarted
+  with_items:
+    - landscape-appserver
+    - landscape-msgserver
+    - landscape-pingserver
+    - landscape-job-handler
+    - landscape-async-frontend
+  tags: landscape-server

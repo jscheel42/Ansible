@@ -1,0 +1,5 @@
+---
+
+tomcat_version: 8.0.28
+tomcat_user: tomcat
+tomcat_install: /home/tomcat

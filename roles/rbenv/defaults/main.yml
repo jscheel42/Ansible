@@ -1,0 +1,6 @@
+---
+rbenv_user: "{{ linux_user }}"
+rbenv_checkout_main: "{{ git_user_home }}/.rbenv"
+rbenv_checkout_ruby_build: "{{ git_user_home }}/.ruby-build"
+rbenv_link_ruby_build: "{{ rbenv_checkout_main }}/plugins/ruby-build"
+rbenv_bin: "{{ rbenv_checkout_main }}/bin"

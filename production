@@ -1,0 +1,19 @@
+[appsservers]
+linode-apps01
+
+[proxyservers]
+linode-apps01
+
+#############
+# GROUP UP
+#############
+
+[servers:children]
+appsservers
+proxyservers
+
+[production:children]
+servers
+
+[all:children]
+production
