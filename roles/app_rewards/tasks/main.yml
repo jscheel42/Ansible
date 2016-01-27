@@ -7,20 +7,16 @@
   when: ansible_os_family == "RedHat"
 
 - include: suse.yml
-  when: ansible_os_family == "Suse" or "openSUSE Leap"
+  when: ansible_os_family == "Suse"
+
+- include: suse.yml
+  when: ansible_os_family == "openSUSE Leap"
 
 - name: create app_rewards directory
   file:
     path: "{{ app_rewards_dir }}"
     state: directory
     owner: "{{ app_rewards_user }}"
-  tags: app_rewards
-
-- name: setup systemd service file
-  template:
-    src: app_rewards.service.j2
-    dest: /usr/lib/systemd/system/app_rewards.service
-  register: app_rewards_service_update
   tags: app_rewards
 
 - name: reload systemd config if service file is changed

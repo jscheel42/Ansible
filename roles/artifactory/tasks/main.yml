@@ -24,7 +24,7 @@
 ## INSTALL ARTIFACTORY IF THE REQUESTED VERSION DOES NOT ALREADY EXIST
 
 - name: download artifactory zip
-  get_url: url={{ artifactory_url }} dest={{ artifactory_zip }} owner={{ tomcat_user }} # group={{ tomcat_user }}
+  get_url: url={{ artifactory_url }} dest={{ artifactory_zip }} owner={{ tomcat_user }} validate_certs=no # group={{ tomcat_user }}
   when: artifactory_version_file_data != "{{ artifactory_version }}"
   tags: artifactory
 

@@ -6,6 +6,7 @@
 dev-jenkins.homenet
 dev-artifactory.homenet
 dev-apps01.homenet
+# dev-base.homenet
 
 #############
 # HUDSON / JENKINS

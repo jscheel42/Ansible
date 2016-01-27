@@ -28,16 +28,16 @@
 
 - name: create directory for postgresql databases
   file:
-    path: "{{ postgresql_dir }}"
+    path: "{{ postgresql_dir_suse }}"
     owner: postgres
     state: directory
   tags: postgresql
 
 - name: init database
   become_user: "postgres"
-  shell: "initdb -D {{ postgresql_dir }}"
+  shell: "initdb -D {{ postgresql_dir_suse }}"
   args:
-    creates: "{{ postgresql_dir }}/PG_VERSION"
+    creates: "{{ postgresql_dir_suse }}/PG_VERSION"
   tags: postgresql
 
 - name: remove unwanted init files
@@ -60,15 +60,15 @@
 
 - name: setup postgresql config
   template:
-    src: postgresql.conf.j2
-    dest: "{{ postgresql_dir }}/postgresql.conf"
+    src: suse_postgresql.conf.j2
+    dest: "{{ postgresql_dir_suse }}/postgresql.conf"
   register: postgresql_config_update
   tags: postgresql
 
 - name: setup pg_hba
   template:
     src: pg_hba.conf.j2
-    dest: "{{ postgresql_dir }}/pg_hba.conf"
+    dest: "{{ postgresql_dir_suse }}/pg_hba.conf"
   register: postgresql_pg_hba_update
   tags: postgresql
 

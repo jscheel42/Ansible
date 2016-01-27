@@ -25,8 +25,8 @@ dependencies:
   - role: ssh-keys
     linux_user: "tomcat"
   - git
-  - role: jruby
-    # jruby_user: "tomcat"
-    linux_user: "tomcat"
-    jruby_gems:
-      - bundler
+  # - role: jruby
+  #   # jruby_user: "tomcat"
+  #   linux_user: "tomcat"
+  #   jruby_gems:
+  #     - bundler

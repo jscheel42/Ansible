@@ -1,16 +1,13 @@
 ---
 
-- name: add specified users to wheel group
-  user:
-    name: "{{ item }}"
-    append: yes
-    groups: "wheel"
-  with_items: sudo_admin_list
-  tags: sudo
+- include: debian.yml
+  when: ansible_os_family == "Debian"
 
-- name: upload sudoers config
-  template:
-    src: sudoers.j2
-    dest: /etc/sudoers
-    validate: 'visudo -cf %s'
-  tags: sudo
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse"
+
+- include: suse.yml
+  when: ansible_os_family == "openSUSE Leap"

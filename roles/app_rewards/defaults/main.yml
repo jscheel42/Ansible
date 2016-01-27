@@ -6,3 +6,6 @@ app_rewards_dir: "{{ app_rewards_home }}/app_rewards"
 app_rewards_jar: "{{ app_rewards_dir }}/rewards.jar"
 
 app_rewards_port: 8080
+
+app_rewards_systemd_dir_debian: /lib/systemd/system
+app_rewards_systemd_dir_suse: /usr/lib/systemd/system

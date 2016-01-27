@@ -12,4 +12,7 @@
   when: ansible_os_family == "RedHat"
 
 - include: suse.yml
-  when: ansible_os_family == "Suse" or "openSUSE Leap"
+  when: ansible_os_family == "Suse"
+
+- include: suse.yml
+  when: ansible_os_family == "openSUSE Leap"

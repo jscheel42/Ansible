@@ -7,7 +7,10 @@
   when: ansible_os_family == "RedHat"
 
 - include: suse.yml
-  when: ansible_os_family == "Suse" or "openSUSE Leap"
+  when: ansible_os_family == "Suse"
+
+- include: suse.yml
+  when: ansible_os_family == "openSUSE Leap"
 
 # Ansible seems to put a "sudo" in front of every shell command.  If we want tomcat user to run the command without sudo, we have to...
 # do this bullshit instead of using sudo_user, become_user, etc
