@@ -20,7 +20,7 @@
   tags: grails
 
 - name: download grails archive
-  get_url: url={{ grails_url }} dest={{ grails_archive }}
+  get_url: url={{ grails_url }} dest={{ grails_archive }} validate_certs=no
   tags: grails
 
 - name: extract archive to install directory
@@ -30,4 +30,3 @@
 - name: create latest symbolic link for grails
   file: src={{ grails_install_target }} dest={{ grails_install_latest }} mode=0755 state=link
   tags: grails
-

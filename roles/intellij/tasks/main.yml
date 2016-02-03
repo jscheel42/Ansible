@@ -21,12 +21,12 @@
   tags: intellij
 
 - name: download intellij tar file (community edition)
-  get_url: url={{ intellij_url_c }} dest={{ intellij_archive }}
+  get_url: url={{ intellij_url_c }} dest={{ intellij_archive }} validate_certs=no
   when: intellij_version_file_data != "{{ intellij_version }}" and intellij_type == "community"
   tags: intellij
 
 - name: download intellij tar file (ultimate edition)
-  get_url: url={{ intellij_url_u }} dest={{ intellij_archive }}
+  get_url: url={{ intellij_url_u }} dest={{ intellij_archive }} validate_certs=no
   when: intellij_version_file_data != "{{ intellij_version }}" and intellij_type == "ultimate"
   tags: intellij
 

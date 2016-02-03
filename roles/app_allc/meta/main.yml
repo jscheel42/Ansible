@@ -1,0 +1,11 @@
+---
+
+dependencies:
+  - role: firewall
+    tcp_ports_allow:
+      - "{{ app_allc_port }}"
+  - java8
+  - role: postgresql
+    postgresql_users: "{{ postgresql_allc_users }}"
+    postgresql_databases: "{{ postgresql_allc_databases }}"
+  - app

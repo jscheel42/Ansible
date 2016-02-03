@@ -1,0 +1,36 @@
+---
+
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: suse.yml
+  when: ansible_os_family == "Suse"
+
+- include: suse.yml
+  when: ansible_os_family == "openSUSE Leap"
+
+- name: create app_allc directory
+  file:
+    path: "{{ app_allc_dir }}"
+    state: directory
+    owner: "{{ app_allc_user }}"
+  tags: app_allc
+
+- name: reload systemd config if service file is changed
+  shell: systemctl daemon-reload
+  when: app_allc_service_update|changed
+  tags: app_allc
+
+- name: start app_allc service
+  service:
+    name: app_allc
+    state: started
+  tags: app_allc
+
+- name: find os_family
+  debug:
+    msg: "{{ ansible_os_family }}"
+  tags: app_allc

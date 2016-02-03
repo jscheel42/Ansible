@@ -20,7 +20,7 @@
   tags: groovy
 
 - name: download groovy archive
-  get_url: url={{ groovy_url }} dest={{ groovy_archive }}
+  get_url: url={{ groovy_url }} dest={{ groovy_archive }} validate_certs=no
   tags: groovy
 
 - name: extract archive to install directory
@@ -30,4 +30,3 @@
 - name: create latest symbolic link for groovy
   file: src={{ groovy_install_target }} dest={{ groovy_install_latest }} mode=0755 state=link
   tags: groovy
-

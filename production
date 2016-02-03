@@ -1,8 +1,8 @@
 [appsservers]
-linode-apps01
+dosfo-apps01.cloudnet
 
 [proxyservers]
-linode-apps01
+dosfo-apps01.cloudnet
 
 #############
 # GROUP UP

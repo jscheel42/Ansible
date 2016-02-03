@@ -55,6 +55,7 @@
     - .vault/secrets
   roles:
     - app_rewards
+    - app_allc
 
 - hosts: htpc
   vars_files:

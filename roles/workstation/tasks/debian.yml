@@ -32,8 +32,8 @@
 - name: install workstation packages
   apt: name={{ item }} state=present
   with_items:
-    - amarok
-    - ansible
+    # - amarok
+    # - ansible
     # - atom
     - build-essential
     # - chromium-browser
@@ -42,7 +42,7 @@
     - gawk
     - git
     - g++
-    - ubuntu-restricted-extras
+    # - ubuntu-restricted-extras
     # - libreoffice
     # - pepperflashplugin-nonfree
     - spotify-client

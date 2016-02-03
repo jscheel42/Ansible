@@ -19,10 +19,10 @@ postgresql_rewards_databases:
       owner: rewards }
 
 postgresql_allc_users:
-- { name: "allc",
-    perms: "LOGIN",
-    password: "{{ secret_postgresql_password_allc }}" }
+  - { name: "allc",
+      perms: "LOGIN",
+      password: "{{ secret_postgresql_password_default }}"}
 
 postgresql_allc_databases:
-- { name: allc_dev,
-    owner: allc }
+  - { name: allc,
+      owner: allc }

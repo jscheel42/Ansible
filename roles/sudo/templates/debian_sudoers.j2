@@ -26,7 +26,7 @@ root    ALL=(ALL:ALL) ALL
 
 #includedir /etc/sudoers.d
 
-app ALL = NOPASSWD: /usr/bin/systemctl restart app_*.service
-app ALL = NOPASSWD: /usr/bin/systemctl stop app_*.service
-app ALL = NOPASSWD: /usr/bin/systemctl start app_*.service
-app ALL = NOPASSWD: /usr/bin/systemctl status app_*.service
+app ALL = NOPASSWD: /bin/systemctl restart app_*.service
+app ALL = NOPASSWD: /bin/systemctl stop app_*.service
+app ALL = NOPASSWD: /bin/systemctl start app_*.service
+app ALL = NOPASSWD: /bin/systemctl status app_*.service
