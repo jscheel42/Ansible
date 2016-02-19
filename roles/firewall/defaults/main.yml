@@ -3,3 +3,4 @@ tcp_ports_allow:
 tcp_ports_limit: []
 tcp_ports_forward:
   - { from: [], to: [] }
+udp_ports_allow: []

@@ -2,3 +2,10 @@
 
 dependencies:
   - repo-nux
+  - role: firewall
+    tcp_ports_allow:
+      - 27036
+      - 27037
+    udp_ports_allow:
+      - 27031
+      - 27036

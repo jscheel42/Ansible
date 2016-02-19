@@ -14,6 +14,12 @@
   notify: reload ufw settings
   tags: firewall
 
+- name: open udp ports with rule=allow
+  ufw: port={{ item }} proto=udp rule=allow
+  with_items: "{{ udp_ports_allow }}"
+  notify: reload ufw settings
+  tags: firewall
+
 - name: open tcp ports with rule=limit
   ufw: port={{ item }} proto=tcp rule=limit
   with_items: "{{ tcp_ports_limit }}"
