@@ -62,6 +62,7 @@
     - .vault/secrets
   roles:
     - { role: firewall, tcp_ports_allow: [5900] }
+    - steam
 
 #############
 # LAPTOP
