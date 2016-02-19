@@ -7,7 +7,7 @@ CMD="$CMD -l serenity.homenet,pod.homenet"
 CMD="$CMD -t firewall"
 # CMD="$CMD -v"
 
-# CMD="$CMD -e update_all_packages=yes"
+CMD="$CMD -e update_all_packages=yes"
 
 # $CMD -t firewall
 $CMD

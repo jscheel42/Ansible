@@ -1,1 +1,7 @@
 ---
+
+- name: install steam
+  zypper:
+    name: steam
+    state: present
+  tags: steam
