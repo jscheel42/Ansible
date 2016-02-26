@@ -94,7 +94,7 @@
     password: "{{ item.password }}"
   with_items: postgresql_admins
   when: postgresql_admins[0].name is defined
-  no_log: True # Don't want password showing in log, this module does not filter it for some reason
+  # no_log: True # Don't want password showing in log, this module does not filter it for some reason
   tags: postgresql
 
 - name: add postgresql users
@@ -105,7 +105,7 @@
     password: "{{ item.password }}"
   with_items: postgresql_users
   when: postgresql_users[0].name is defined
-  no_log: True # Don't want password showing in log, this module does not filter it for some reason
+  # no_log: True # Don't want password showing in log, this module does not filter it for some reason
   tags: postgresql
 
 - name: add postgresql databases
@@ -114,6 +114,8 @@
     owner: "{{ item.owner }}"
     login_user: postgres
     port: "{{ postgresql_port }}"
+    encoding: utf8
+    template: template0
   with_items: postgresql_databases
   when: postgresql_databases[0].name is defined
   tags: postgresql

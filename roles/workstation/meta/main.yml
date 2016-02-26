@@ -21,6 +21,9 @@ dependencies:
   - role: postgresql
     postgresql_users: "{{ postgresql_allc_users }}"
     postgresql_databases: "{{ postgresql_allc_databases }}"
+  - role: postgresql
+    postgresql_users: "{{ postgresql_allc_rails_users }}"
+    postgresql_databases: "{{ postgresql_allc_rails_databases }}"
   - steam
   - android-studio
   - virtualbox-host

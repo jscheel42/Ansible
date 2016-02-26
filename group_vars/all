@@ -28,3 +28,12 @@ postgresql_allc_users:
 postgresql_allc_databases:
   - { name: allc,
       owner: allc }
+
+postgresql_allc_rails_users:
+  - { name: "allc_rails",
+      perms: "LOGIN,CREATEDB",
+      password: "{{ secret_postgresql_password_default }}"}
+
+postgresql_allc_rails_databases:
+  - { name: allc_rails_dev,
+      owner: allc_rails }

@@ -1,6 +1,6 @@
 jruby_user: "{{ linux_user }}"
 # jruby_version: 1.7.22
-jruby_version: 9.0.1.0
+jruby_version: 9.0.5.0
 jruby_gems: []
 jruby_install: "{{ rbenv_checkout_main }}/versions/jruby-{{ jruby_version }}"
 jruby_gem_exec: "{{ rbenv_checkout_main }}/versions/jruby-{{ jruby_version }}/bin/gem"

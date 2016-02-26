@@ -3,3 +3,4 @@
 dependencies:
   - role: rbenv
     rbenv_user: "{{ jruby_user }}"
+  - java8

@@ -1,0 +1,12 @@
+---
+
+- name: add entries in bash files
+  lineinfile: dest={{ item }} line={{ bash_line }} state=present create=yes owner={{ bash_user }} insertbefore="{{ bash_insert_before }}" #group={{ bash_user }}
+  with_items: bash_files
+  when: bash_global != "yes"
+  tags: bash
+
+- name: add entries to global bash configuration
+  lineinfile: dest=/etc/bash.bashrc line={{ bash_line }} state=present create=yes insertbefore="{{ bash_insert_before }}" #group={{ bash_user }}
+  when: bash_global == "yes"
+  tags: bash

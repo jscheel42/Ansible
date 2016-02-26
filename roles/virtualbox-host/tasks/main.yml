@@ -12,6 +12,12 @@
 - include: suse.yml
   when: ansible_os_family == "openSUSE Leap"
 
+- name: add vboxusers group
+  group:
+    name: "vboxusers"
+    state: present
+  tags: virtualbox-host
+
 - name: add user to vboxusers
   user:
     name: "{{ virtualbox_user }}"
