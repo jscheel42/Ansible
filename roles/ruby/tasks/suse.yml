@@ -1,0 +1,8 @@
+---
+
+- name: install packages required for ruby
+  zypper: name={{ item }} state=present
+  with_items:
+    - openssl-devel
+    - readline-devel
+    - zlib-devel

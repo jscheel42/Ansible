@@ -1,0 +1,6 @@
+ruby_user: "{{ linux_user }}"
+# ruby_version: 1.7.22
+ruby_version: 2.3.0
+ruby_gems: []
+ruby_install: "{{ rbenv_checkout_main }}/versions/{{ ruby_version }}"
+ruby_gem_exec: "{{ rbenv_checkout_main }}/versions/{{ ruby_version }}/bin/gem"
