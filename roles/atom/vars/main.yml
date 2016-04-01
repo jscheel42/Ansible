@@ -1,5 +1,7 @@
 ---
 
-atom_url: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom.x86_64.rpm"
+atom_url_rpm: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom.x86_64.rpm"
+atom_url_deb: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom-amd64.deb"
 atom_download_folder: /usr/local/src
 atom_rpm: "{{ atom_download_folder }}/atom-{{ atom_version }}.rpm"
+atom_deb: "{{ atom_download_folder }}/atom-{{ atom_version }}.deb"

@@ -6,7 +6,7 @@ ssh_pubkey_hudson_hudson: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDzJL1+lf0R6fG1X
 ssh_pubkey_tomcat_jenkins: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXkNvSN5428vKIzP854HxEgcj/31i56liG2iFhRN3/dXwh4r4C0JnYmF+PufcxqdoEugWJhElNUMniohdq1toUDm8VwQBlnWehFX48CAJZZWBh8aZTX31JxFSOgmeGkDJylo7tH42qeyvZQZqySaXKr2BCs5pIHv3dmbUsnWiRiO0/QdZnJ9nA7H1m7eBfXGSWh5ZQ/QWgwzplR7JmpYuj47ehOEj1AADexOlM2umUKLphbbHuzbEBaqzgytxC34nAl1divtRkohq+uMLcmdLK/w7U98Jjbi6KI6W7nq1bAM7Z2U4peW6qDATLMOB3HBXMbfXyX/vliTu9iOGcaOE/ ansible-generated on dev-base"
 
 all_vars: "are set"
-groups_admin_debian: sudo
+groups_admin_ubuntu: sudo
 groups_admin_redhat: wheel
 linux_user: jscheel
 update_all_packages: "no"

@@ -11,8 +11,8 @@ This project uses a ".vault" folder with files inside that contain variables wit
   * secret_spacewalk_web_password: "foo"
 
 Primary OS:
-- openSuSE Leap 42.1
+- Ubuntu 14.04
 
 Most roles also support:
 - CentOS 7
-- Ubuntu 14.04
+- Opensuse Leap 42.1

@@ -1,14 +1,14 @@
 ---
 
-- name: download atom rpm
+- name: download atom deb
   get_url:
-    url: "{{ atom_url_rpm }}"
-    dest: "{{ atom_rpm }}"
+    url: "{{ atom_url_deb }}"
+    dest: "{{ atom_deb }}"
   register: atom_downloaded
   tags: atom
 
 - name: install atom from rpm if download was performed
-  yum:
-    name: "{{ atom_rpm }}"
+  apt:
+    deb: "{{ atom_deb }}"
   when: atom_downloaded|changed
   tags: atom

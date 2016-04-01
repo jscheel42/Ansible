@@ -2,5 +2,5 @@
 
 - name: install common packages
   apt: name={{ item }} state=present
-  with_items: common_package_list_debian
+  with_items: common_package_list_ubuntu
   tags: common

@@ -29,12 +29,12 @@ dependencies:
   - steam
   - android-studio
   - virtualbox-host
-  - gradle
-  - grails
-  - play
-  - spring
-  - intellij
-  - pycharm
+  # - gradle
+  # - grails
+  # - play
+  # - spring
+  # - intellij
+  # - pycharm
   # - netbeans
   # - eclipse
   - atom

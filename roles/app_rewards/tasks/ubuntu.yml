@@ -3,6 +3,6 @@
 - name: setup systemd service file
   template:
     src: app_rewards.service.j2
-    dest: "{{ app_rewards_systemd_dir_debian }}/app_rewards.service"
+    dest: "{{ app_rewards_systemd_dir_ubuntu }}/app_rewards.service"
   register: app_rewards_service_update
   tags: app_rewards

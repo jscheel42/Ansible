@@ -12,15 +12,15 @@
 
 - name: setup postgresql config
   template:
-    src: debian_postgresql.conf.j2
-    dest: "{{ postgresql_dir_debian }}/postgresql.conf"
+    src: ubuntu_postgresql.conf.j2
+    dest: "{{ postgresql_dir_ubuntu }}/postgresql.conf"
   register: postgresql_config_update
   tags: postgresql
 
 - name: setup pg_hba
   template:
     src: pg_hba.conf.j2
-    dest: "{{ postgresql_dir_debian }}/pg_hba.conf"
+    dest: "{{ postgresql_dir_ubuntu }}/pg_hba.conf"
   register: postgresql_pg_hba_update
   tags: postgresql
 

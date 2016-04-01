@@ -15,7 +15,7 @@
 
 - name: upload sudoers config
   template:
-    src: debian_sudoers.j2
+    src: ubuntu_sudoers.j2
     dest: /etc/sudoers
     validate: 'visudo -cf %s'
   tags: sudo

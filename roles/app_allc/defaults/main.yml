@@ -7,5 +7,5 @@ app_allc_jar: "{{ app_allc_dir }}/allc.jar"
 
 app_allc_port: 8181
 
-app_allc_systemd_dir_debian: /lib/systemd/system
+app_allc_systemd_dir_ubuntu: /lib/systemd/system
 app_allc_systemd_dir_suse: /usr/lib/systemd/system

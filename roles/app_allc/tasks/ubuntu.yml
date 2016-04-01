@@ -3,6 +3,6 @@
 - name: setup systemd service file
   template:
     src: app_allc.service.j2
-    dest: "{{ app_allc_systemd_dir_debian }}/app_allc.service"
+    dest: "{{ app_allc_systemd_dir_ubuntu }}/app_allc.service"
   register: app_allc_service_update
   tags: app_allc

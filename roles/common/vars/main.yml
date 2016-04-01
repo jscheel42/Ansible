@@ -8,8 +8,7 @@ common_package_list_centos:
   - unzip
   - vim
 
-common_package_list_debian:
-  - aptitude
+common_package_list_ubuntu:
   - curl
   - fail2ban
   - git

@@ -2,7 +2,7 @@
 
 - name: download atom rpm
   get_url:
-    url: "{{ atom_url }}"
+    url: "{{ atom_url_rpm }}"
     dest: "{{ atom_rpm }}"
   register: atom_downloaded
   tags: atom

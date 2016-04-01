@@ -12,7 +12,7 @@
   tags: glassfish
 
 - name: add jscheel to glassfishadm group
-  user: name=jscheel groups="{{ groups_admin_debian }},glassfishadm"
+  user: name=jscheel groups="{{ groups_admin_ubuntu }},glassfishadm"
   tags: glassfish
 
 - name: setup port redirection using before.rules

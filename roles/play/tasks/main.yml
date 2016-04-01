@@ -7,7 +7,7 @@
   tags: play
 
 - name: download play archive
-  get_url: url={{ play_url }} dest={{ play_archive }}
+  get_url: url={{ play_url }} dest={{ play_archive }} validate_certs=false
   tags: play
 
 - name: extract archive to install directory
