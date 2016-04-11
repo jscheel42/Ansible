@@ -1,7 +1,6 @@
 ---
 
 dependencies:
-  - repo-nux
   - role: firewall
     tcp_ports_allow:
       - 27036

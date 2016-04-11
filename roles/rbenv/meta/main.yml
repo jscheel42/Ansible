@@ -10,8 +10,8 @@ dependencies:
       - { git_repo: "https://github.com/sstephenson/ruby-build.git", git_dir: "{{ rbenv_checkout_ruby_build }}", git_update: "yes" }
   - role: bash
     bash_user: "{{ rbenv_user }}"
-    bash_line: "'export PATH=\"{{ rbenv_bin }}:$PATH\"'"
+    bash_line: "export PATH=\"{{ rbenv_bin }}:$PATH\""
     bash_insert_before: "BOF"
   - role: bash
     bash_user: "{{ rbenv_user }}"
-    bash_line: "'eval \"$(rbenv init -)\"'"
+    bash_line: "eval \"$(rbenv init -)\""

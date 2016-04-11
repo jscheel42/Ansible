@@ -6,8 +6,8 @@ dependencies:
   - java8
   - role: bash
     bash_global: "yes"
-    bash_line: "'export PATH=$GRADLE_HOME/bin:$PATH'"
+    bash_line: "export PATH=$GRADLE_HOME/bin:$PATH"
   - role: bash
     bash_global: "yes"
     bash_insert_before: ^.*GRADLE_HOME/bin.*$
-    bash_line: "'export GRADLE_HOME={{ gradle_install_latest }}'"
+    bash_line: "export GRADLE_HOME={{ gradle_install_latest }}"

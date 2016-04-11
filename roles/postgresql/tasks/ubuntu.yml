@@ -12,7 +12,7 @@
 
 - name: setup postgresql config
   template:
-    src: ubuntu_postgresql.conf.j2
+    src: postgresql.conf.j2
     dest: "{{ postgresql_dir_ubuntu }}/postgresql.conf"
   register: postgresql_config_update
   tags: postgresql

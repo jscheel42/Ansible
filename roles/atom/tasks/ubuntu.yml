@@ -1,14 +1,13 @@
 ---
 
-- name: download atom deb
-  get_url:
-    url: "{{ atom_url_deb }}"
-    dest: "{{ atom_deb }}"
-  register: atom_downloaded
+- name: add webupd8team/atom
+  apt_repository:
+    repo: ppa:webupd8team/atom
+    state: present
   tags: atom
 
-- name: install atom from deb if download was performed
+- name: install atom
   apt:
-    deb: "{{ atom_deb }}"
-  when: atom_downloaded|changed
+    name: atom
+    state: present
   tags: atom

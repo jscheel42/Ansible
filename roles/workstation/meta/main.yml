@@ -1,8 +1,6 @@
 ---
 
 dependencies:
-  - repo-nux
-  - repo-elrepo
   - role: git
     git_co_info:
       - { git_repo: "git@bitbucket.org:jscheel42/ansible.git", git_dir: "{{ git_ansible_dir }}" }

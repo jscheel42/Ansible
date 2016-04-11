@@ -4,15 +4,6 @@
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
-- include: centos.yml
-  when: ansible_os_family == "RedHat"
-
-- include: suse.yml
-  when: ansible_os_family == "Suse"
-
-- include: suse.yml
-  when: ansible_os_family == "openSUSE Leap"
-
 - name: create required directories
   file: path={{ item }} state=directory
   with_items:
@@ -30,4 +21,3 @@
 - name: create latest symbolic link for spring
   file: src={{ spring_install_target }} dest={{ spring_install_latest }} mode=0755 state=link
   tags: spring
-

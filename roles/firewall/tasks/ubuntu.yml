@@ -1,10 +1,5 @@
 ---
 
-- name: find ansible_distribution
-  debug:
-    msg: "{{ ansible_distribution }}"
-  tags: firewall
-
 - name: install ufw package
   apt: name=ufw state=present
   tags: firewall

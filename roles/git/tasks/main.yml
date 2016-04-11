@@ -3,15 +3,6 @@
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
-- include: centos.yml
-  when: ansible_os_family == "RedHat"
-
-- include: suse.yml
-  when: ansible_os_family == "Suse"
-
-- include: suse.yml
-  when: ansible_os_family == "openSUSE Leap"
-
 - name: setup .gitconfig
   template: src=.gitconfig.j2 dest={{ git_user_home }}/.gitconfig mode=0644 owner={{ git_user }}
   tags: git

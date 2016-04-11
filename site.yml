@@ -25,12 +25,6 @@
   roles:
     - virtualbox-guest
 
-- hosts: spacewalkservers
-  vars_files:
-    - .vault/secrets
-  roles:
-    - spacewalk-server
-
 - hosts: buildservers
   vars_files:
     - .vault/secrets

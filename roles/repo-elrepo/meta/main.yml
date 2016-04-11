@@ -1,9 +1,0 @@
----
-
-dependencies:
-  - role: spacewalk-client
-    spacewalk_add_channel_list:
-     - centos7_elrepo
-     - centos7_elrepo_extras 
-     - centos7_elrepo_kernel 
-     - centos7_elrepo_testing

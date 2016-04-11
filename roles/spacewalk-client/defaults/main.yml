@@ -1,8 +1,0 @@
----
-
-spacewalk_client_repo: "http://yum.spacewalkproject.org/2.4-client/RHEL/7/x86_64/spacewalk-client-repo-2.4-3.el7.noarch.rpm"
-spacewalk_register_url: "spacewalk.homenet"
-spacewalk_add_channel_client: "centos7_spacewalk_client"
-spacewalk_add_channel_list: []
-spacewalk_web_username: "admin"
-spacewalk_web_password: "{{ secret_spacewalk_web_password }}"

@@ -2,12 +2,3 @@
 
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
-
-- include: centos.yml
-  when: ansible_os_family == "RedHat"
-
-- include: suse.yml
-  when: ansible_os_family == "Suse"
-
-- include: suse.yml
-  when: ansible_os_family == "openSUSE Leap"

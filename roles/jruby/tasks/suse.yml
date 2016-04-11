@@ -1,9 +1,0 @@
----
-
-- name: install packages required for jruby
-  zypper: name={{ item }} state=present
-  with_items:
-    - curl
-    - gawk
-    - gcc-c++
-    - make

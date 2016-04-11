@@ -1,3 +1,6 @@
+h2. Target OS:
+- Ubuntu 16.04
+
 This project uses a ".vault" folder with files inside that contain variables with passwords.  The required files are:
 
 - .vault/secrets
@@ -5,14 +8,3 @@ This project uses a ".vault" folder with files inside that contain variables wit
   * secret_tomcat_admin_pw: "foo"
   * secret_maven_settings_pw: "foo"
   * secret_generic_admin_email: "foo@moo.com"
-  * secret_spacewalk_ssl_password: "foo"
-  * secret_spacewalk_db_password: "foo"
-  * secret_spacewalk_centos7_key: "foo"
-  * secret_spacewalk_web_password: "foo"
-
-Primary OS:
-- Ubuntu 14.04
-
-Most roles also support:
-- CentOS 7
-- Opensuse Leap 42.1

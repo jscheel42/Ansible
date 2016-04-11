@@ -3,10 +3,9 @@
 dependencies:
   - sudo
   - update
-  - repo-epel
   - role: bash
     bash_global: "yes"
-    bash_line: "'export VISUAL=vim && export EDITOR=$VISUAL'"
+    bash_line: "export VISUAL=vim && export EDITOR=$VISUAL"
   - role: bash
     bash_global: "yes"
     bash_line: "PS1='{{'\"'}}\\[\\e[0;32m\\]\\u@\\h\\[\\e[m\\] \\[\\e[1;34m\\]\\w\\[\\e[m\\] \\[\\e[1;32m\\]\\$\\[\\e[m\\] \\[\\e[1;37m\\]{{'\"'}}'"
@@ -18,10 +17,4 @@ dependencies:
     auth_key_list:
       - "{{ ssh_pubkey_jscheel_serenity }}"
       - "{{ ssh_pubkey_jscheel_pod }}"
-  - role: spacewalk-client
-    spacewalk_add_channel_list:
-     - centos7_epel
-     - centos7_extras
-     - centos7_main
-     - centos7_updates
   - swappiness

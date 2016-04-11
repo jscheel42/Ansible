@@ -3,9 +3,6 @@
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
-- include: centos.yml
-  when: ansible_os_family == "RedHat"
-
 - name: add glassfish user
   user: name=glassfish createhome=yes system=yes shell=/bin/bash
   tags: glassfish

@@ -3,15 +3,6 @@
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
-- include: centos.yml
-  when: ansible_os_family == "RedHat"
-
-- include: suse.yml
-  when: ansible_os_family == "Suse"
-
-- include: suse.yml
-  when: ansible_os_family == "openSUSE Leap"
-
 - name: create app_rewards directory
   file:
     path: "{{ app_rewards_dir }}"
@@ -28,9 +19,4 @@
   service:
     name: app_rewards
     state: started
-  tags: app_rewards
-
-- name: find os_family
-  debug:
-    msg: "{{ ansible_os_family }}"
   tags: app_rewards

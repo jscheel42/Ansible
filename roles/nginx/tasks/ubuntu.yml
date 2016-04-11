@@ -6,11 +6,6 @@
     state: present
   tags: nginx
 
-- name: find ansible_hostname
-  debug:
-    msg: "{{ ansible_hostname }}"
-  tags: nginx
-
 - name: setup nginx.conf
   template:
     src: "{{ ansible_hostname }}.nginx.conf.j2"

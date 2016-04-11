@@ -1,6 +1,0 @@
----
-
-- name: install common packages
-  yum: name={{ item }} state=present
-  with_items: common_package_list_centos
-  tags: common

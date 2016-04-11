@@ -1,9 +1,0 @@
----
-
-- name: install steam and needed packages
-  yum: name={{ item }} state=present
-  with_items:
-    - libgudev1.i686
-    - libcurl.i686
-    - steam
-  tags: steam

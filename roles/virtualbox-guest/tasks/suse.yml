@@ -1,8 +1,0 @@
----
-
-- name: install virtualbox guest packages
-  zypper: name={{ item }} state=present
-  with_items:
-    - virtualbox-guest-kmp-default
-    - virtualbox-guest-tools
-  tags: virtualbox-guest

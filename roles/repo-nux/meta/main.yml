@@ -1,6 +1,0 @@
----
-
-dependencies:
-  - role: spacewalk-client
-    spacewalk_add_channel_list:
-      - centos7_nux

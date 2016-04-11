@@ -1,10 +1,5 @@
 ---
 
-- name: find os_family
-  debug:
-    msg: "{{ ansible_os_family }}"
-  tags: sudo
-
 - name: add specified users to sudo group
   user:
     name: "{{ item }}"
