@@ -1,0 +1,43 @@
+---
+
+- name: set DEFAULT_FORWARD_POLICY in /etc/default/ufw
+  lineinfile:
+    dest: /etc/default/ufw
+    line: "DEFAULT_FORWARD_POLICY=\"ACCEPT\""
+    state: present
+    create: yes
+    regexp: "^DEFAULT_FORWARD_POLICY"
+
+- name: add docker gpg key
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+- name: add docker repository
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-xenial testing"
+    state: present
+
+- name: install docker-engine
+  apt:
+    name: docker-engine
+    state: present
+
+- name: start and enable docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: add user to docker group
+  user:
+    name: "{{ docker_user }}"
+    groups: docker
+    append: yes
+
+- name: setup docker hub auth
+  template:
+    src: config.json.j2
+    dest: "~{{ docker_user }}/.docker/config.json"
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"

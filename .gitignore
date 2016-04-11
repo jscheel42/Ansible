@@ -26,3 +26,5 @@
 
 # Ignore pycharm generated files
 /**/.idea/
+
+/site.retry

@@ -36,3 +36,4 @@ dependencies:
   # - eclipse
   - atom
   # - sublime
+  - docker-engine
