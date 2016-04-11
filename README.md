@@ -1,4 +1,4 @@
-h2. Target OS:
+Target OS:
 - Ubuntu 16.04
 
 This project uses a ".vault" folder with files inside that contain variables with passwords.  The required files are:
