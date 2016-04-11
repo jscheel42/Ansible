@@ -18,19 +18,19 @@
 
 - name: ensure destination(s) are present
   file: path={{ item.git_dir }} state=directory owner={{ git_user }} # group={{ git_user }}
-  with_items: git_co_info
+  with_items: "{{ git_co_info }}"
   when: item.git_repo != [] and item.git_dir != []
   tags: git
 
 - name: checkout git repo
   # sudo_user: "{{ linux_user }}"
   git: repo={{ item.git_repo }} dest={{ item.git_dir }} accept_hostkey=true key_file={{ ssh_keyfile_private }} update={{ item.git_update if item.git_update is defined else "no" }}
-  with_items: git_co_info
+  with_items: "{{ git_co_info }}"
   when: item.git_repo != [] and item.git_dir != []
   tags: git
 
 - name: assign owner to git repo
   file: path={{ item.git_dir }} state=directory owner={{ linux_user }}
-  with_items: git_co_info
+  with_items: "{{ git_co_info }}"
   when: item.git_repo != [] and item.git_dir != []
   tags: git

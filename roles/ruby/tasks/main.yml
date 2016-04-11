@@ -29,6 +29,6 @@
 
 - name: install bundler gem
   shell: bash -lc "sudo -i -u {{ ruby_user }} gem install {{ item }}"
-  with_items: ruby_gems
+  with_items: "{{ ruby_gems }}"
   when: ruby_installed|changed
   tags: ruby

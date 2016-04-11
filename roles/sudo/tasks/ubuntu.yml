@@ -10,7 +10,7 @@
     name: "{{ item }}"
     append: yes
     groups: "sudo"
-  with_items: sudo_admin_list
+  with_items: "{{ sudo_admin_list }}"
   tags: sudo
 
 - name: upload sudoers config

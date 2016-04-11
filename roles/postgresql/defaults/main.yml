@@ -1,7 +1,7 @@
 ---
 
 postgresql_version_major: 9
-postgresql_version_minor: 4
+postgresql_version_minor: 5
 postgresql_version: "{{ postgresql_version_major }}{{ postgresql_version_minor }}"
 
 postgresql_dir_suse: "/data/pg-{{ postgresql_version }}"

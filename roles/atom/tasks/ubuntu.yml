@@ -7,7 +7,7 @@
   register: atom_downloaded
   tags: atom
 
-- name: install atom from rpm if download was performed
+- name: install atom from deb if download was performed
   apt:
     deb: "{{ atom_deb }}"
   when: atom_downloaded|changed

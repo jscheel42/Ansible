@@ -26,14 +26,14 @@
 
 - name: restart postgresql service if config changes are made
   service:
-    name: postgresql
+    name: postgresql #@{{ postgresql_version_major }}.{{ postgresql_version_minor }}-main.service
     state: restarted
   when: postgresql_config_update|changed or postgresql_pg_hba_update|changed
   tags: postgresql
 
 - name: start postgresql service
   service:
-    name: postgresql
+    name: postgresql #@{{ postgresql_version_major }}.{{ postgresql_version_minor }}-main.service
     state: started
     enabled: yes
   tags: postgresql
@@ -44,9 +44,9 @@
     role_attr_flags: "{{ item.perms }}"
     port: "{{ postgresql_port }}"
     password: "{{ item.password }}"
-  with_items: postgresql_admins
+  with_items: "{{ postgresql_admins }}"
   when: postgresql_admins[0].name is defined
-  no_log: True # Don't want password showing in log, this module does not filter it for some reason
+  # no_log: True # Don't want password showing in log, this module does not filter it for some reason
   tags: postgresql
 
 - name: add postgresql users
@@ -55,9 +55,9 @@
     role_attr_flags: "{{ item.perms }}"
     port: "{{ postgresql_port }}"
     password: "{{ item.password }}"
-  with_items: postgresql_users
+  with_items: "{{ postgresql_users }}"
   when: postgresql_users[0].name is defined
-  no_log: True # Don't want password showing in log, this module does not filter it for some reason
+  # no_log: True # Don't want password showing in log, this module does not filter it for some reason
   tags: postgresql
 
 - name: add postgresql databases
@@ -66,6 +66,6 @@
     owner: "{{ item.owner }}"
     login_user: postgres
     port: "{{ postgresql_port }}"
-  with_items: postgresql_databases
+  with_items: "{{ postgresql_databases }}"
   when: postgresql_databases[0].name is defined
   tags: postgresql

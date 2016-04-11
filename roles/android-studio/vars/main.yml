@@ -1,2 +1,0 @@
-androidstudio_tmp_dir: /tmp/androidstudio
-androidstudio_archive: /tmp/androidstudio-{{ androidstudio_version }}.tar.gz
