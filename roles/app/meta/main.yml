@@ -7,7 +7,9 @@ dependencies:
     linux_user: "{{ app_user }}"
     auth_key_list:
       - "{{ ssh_pubkey_tomcat_jenkins }}"
-
+  - role: docker-engine
+    docker_user: "{{ app_user }}"
+    
   # - role: jruby
   #   # jruby_user: "tomcat"
   #   linux_user: "tomcat"

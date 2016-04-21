@@ -1,8 +1,14 @@
 ---
 
-- name: setup systemd service file
+- name: create app_allc directory
+  file:
+    path: "{{ app_allc_dir }}"
+    state: directory
+    owner: "{{ app_allc_user }}"
+
+- name: deploy docker-compose.yml template
   template:
-    src: app_allc.service.j2
-    dest: "{{ app_allc_systemd_dir_ubuntu }}/app_allc.service"
-  register: app_allc_service_update
-  tags: app_allc
+    src: docker-compose.yml.j2
+    dest: "{{ app_allc_dir }}/docker-compose.yml"
+    owner: "{{ app_allc_user }}"
+    group: "{{ app_allc_user }}"

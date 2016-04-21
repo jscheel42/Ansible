@@ -48,7 +48,8 @@
   vars_files:
     - .vault/secrets
   roles:
-    - app_rewards
+    - docker-engine
+    # - app_rewards
     - app_allc
 
 - hosts: htpc

@@ -2,21 +2,4 @@
 
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
-
-- name: create app_allc directory
-  file:
-    path: "{{ app_allc_dir }}"
-    state: directory
-    owner: "{{ app_allc_user }}"
-  tags: app_allc
-
-- name: reload systemd config if service file is changed
-  shell: systemctl daemon-reload
-  when: app_allc_service_update|changed
-  tags: app_allc
-
-- name: start app_allc service
-  service:
-    name: app_allc
-    state: started
   tags: app_allc

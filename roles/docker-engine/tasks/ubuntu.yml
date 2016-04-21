@@ -23,6 +23,11 @@
     name: docker-engine
     state: present
 
+- name: install docker-compose
+  apt:
+    name: docker-compose
+    state: present
+
 - name: start and enable docker service
   service:
     name: docker
@@ -34,6 +39,13 @@
     name: "{{ docker_user }}"
     groups: docker
     append: yes
+
+- name: ensure ~/.docker folder exists
+  file:
+    state: directory
+    path: "~{{ docker_user }}/.docker"
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
 
 - name: setup docker hub auth
   template:
