@@ -4,7 +4,7 @@
 CMD="ansible-playbook -i production site.yml --sudo --ask-vault-pass"
 
 CMD="$CMD -l joshuascheel.com"
-# CMD="$CMD -t nginx"
+# CMD="$CMD -t postgresql"
 CMD="$CMD -v"
 
 # CMD="$CMD -e update_all_packages=yes"

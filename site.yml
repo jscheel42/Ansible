@@ -48,7 +48,7 @@
   vars_files:
     - .vault/secrets
   roles:
-    - docker-engine
+    # - docker-engine # Should be covered by dependencies app_allc > app > docker-engine
     # - app_rewards
     - app_allc
 

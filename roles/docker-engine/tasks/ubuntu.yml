@@ -15,7 +15,7 @@
 
 - name: add docker repository
   apt_repository:
-    repo: "deb https://apt.dockerproject.org/repo ubuntu-xenial testing"
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
     state: present
 
 - name: install docker-engine
@@ -23,8 +23,13 @@
     name: docker-engine
     state: present
 
-- name: install docker-compose
+- name: install python-pip (for docker-compose install)
   apt:
+    name: python-pip
+    state: present
+
+- name: install docker-compose
+  pip:
     name: docker-compose
     state: present
 

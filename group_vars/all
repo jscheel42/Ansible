@@ -11,29 +11,17 @@ groups_admin_redhat: wheel
 linux_user: jscheel
 update_all_packages: "no"
 
-postgresql_rewards_users:
-  - { name: "rewards",
-      perms: "LOGIN",
-      password: "{{ secret_postgresql_password_default }}"}
-
-postgresql_rewards_databases:
-  - { name: rewards,
-      owner: rewards }
-
 postgresql_allc_users:
   - { name: "allc",
       perms: "LOGIN",
-      password: "{{ secret_postgresql_password_default }}"}
+      password: "{{ secret_postgresql_password_allc_enc }}"}
 
 postgresql_allc_databases:
   - { name: allc,
       owner: allc }
-
-postgresql_allc_rails_users:
-  - { name: "allc_rails",
-      perms: "LOGIN,CREATEDB",
-      password: "{{ secret_postgresql_password_default }}"}
-
-postgresql_allc_rails_databases:
-  - { name: allc_rails_dev,
-      owner: allc_rails }
+  - { name: allc_dev,
+      owner: allc }
+  - { name: allc_prod,
+      owner: allc }
+  - { name: allc_test,
+      owner: allc }

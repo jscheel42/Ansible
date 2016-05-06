@@ -15,6 +15,6 @@ postgresql_remote_domain: "all"
 postgresql_users: []
 
 postgresql_admins:
-  - {name: "{{ linux_user }}", perms: "SUPERUSER,LOGIN", password: "{{ secret_postgresql_password_default }}" }
+  - {name: "jscheel", perms: "SUPERUSER,LOGIN", password: "{{ secret_postgresql_password_jscheel_enc }}" }
 
 postgresql_databases: []

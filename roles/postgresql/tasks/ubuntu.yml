@@ -44,6 +44,7 @@
     role_attr_flags: "{{ item.perms }}"
     port: "{{ postgresql_port }}"
     password: "{{ item.password }}"
+    encrypted: yes
   with_items: "{{ postgresql_admins }}"
   when: postgresql_admins[0].name is defined
   # no_log: True # Don't want password showing in log, this module does not filter it for some reason
@@ -55,6 +56,7 @@
     role_attr_flags: "{{ item.perms }}"
     port: "{{ postgresql_port }}"
     password: "{{ item.password }}"
+    encrypted: yes
   with_items: "{{ postgresql_users }}"
   when: postgresql_users[0].name is defined
   # no_log: True # Don't want password showing in log, this module does not filter it for some reason
