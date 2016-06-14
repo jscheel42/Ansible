@@ -16,14 +16,8 @@ dependencies:
     maven3_default: "true"
     maven3_latest: "true"
   - role: postgresql
-    postgresql_users: "{{ postgresql_rewards_users }}"
-    postgresql_databases: "{{ postgresql_rewards_databases }}"
-  - role: postgresql
     postgresql_users: "{{ postgresql_allc_users }}"
     postgresql_databases: "{{ postgresql_allc_databases }}"
-  - role: postgresql
-    postgresql_users: "{{ postgresql_allc_rails_users }}"
-    postgresql_databases: "{{ postgresql_allc_rails_databases }}"
   - steam
   - virtualbox-host
   # - gradle
