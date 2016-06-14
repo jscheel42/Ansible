@@ -4,7 +4,7 @@
 CMD="ansible-playbook -i development site.yml --sudo --ask-vault-pass"
 
 CMD="$CMD -l serenity.homenet"
-# CMD="$CMD -t postgresql"
+# CMD="$CMD -t docker-engine"
 # CMD="$CMD -v"
 
 #CMD="$CMD -e update_all_packages=yes"

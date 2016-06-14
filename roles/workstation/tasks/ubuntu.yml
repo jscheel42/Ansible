@@ -1,7 +1,10 @@
 ---
 
 - name: install ppas
-  apt_repository: repo={{ item }} state=present
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+    mode: 644
   with_items:
     - ppa:webupd8team/atom
     - ppa:ansible/ansible
