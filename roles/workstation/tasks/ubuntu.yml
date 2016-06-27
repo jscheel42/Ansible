@@ -1,12 +1,14 @@
 ---
 
-# - name: install ppas
-#   apt_repository: repo={{ item }} state=present
-#   with_items:
-#     # - ppa:webupd8team/atom
-#     # - ppa:libreoffice/ppa
-#     - ppa:ansible/ansible
-#   tags: workstation5
+- name: install ppas
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+    mode: 644
+  with_items:
+    - ppa:webupd8team/atom
+    - ppa:ansible/ansible
+  tags: workstation
 
 - name: add spotify apt key
   apt_key: keyserver=keyserver.ubuntu.com id=D2C19886
@@ -33,8 +35,8 @@
   apt: name={{ item }} state=present
   with_items:
     # - amarok
-    # - ansible
-    # - atom
+    - ansible
+    - atom
     - build-essential
     # - chromium-browser
     - deja-dup
@@ -45,6 +47,7 @@
     # - ubuntu-restricted-extras
     # - libreoffice
     # - pepperflashplugin-nonfree
+    - pgadmin3
     - spotify-client
   tags: workstation
 
