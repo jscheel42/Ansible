@@ -50,24 +50,24 @@
   # no_log: True # Don't want password showing in log, this module does not filter it for some reason
   tags: postgresql
 
-# - name: add postgresql users
-#   postgresql_user:
-#     name: "{{ item.name }}"
-#     role_attr_flags: "{{ item.perms }}"
-#     port: "{{ postgresql_port }}"
-#     password: "{{ item.password }}"
-#     encrypted: yes
-#   with_items: "{{ postgresql_users }}"
-#   when: postgresql_users[0].name is defined
-#   # no_log: True # Don't want password showing in log, this module does not filter it for some reason
-#   tags: postgresql
-#
-# - name: add postgresql databases
-#   postgresql_db:
-#     name: "{{ item.name }}"
-#     owner: "{{ item.owner }}"
-#     login_user: postgres
-#     port: "{{ postgresql_port }}"
-#   with_items: "{{ postgresql_databases }}"
-#   when: postgresql_databases[0].name is defined
-#   tags: postgresql
+- name: add postgresql users
+  postgresql_user:
+    name: "{{ item.name }}"
+    role_attr_flags: "{{ item.perms }}"
+    port: "{{ postgresql_port }}"
+    password: "{{ item.password }}"
+    encrypted: yes
+  with_items: "{{ postgresql_users }}"
+  when: postgresql_users[0].name is defined
+  # no_log: True # Don't want password showing in log, this module does not filter it for some reason
+  tags: postgresql
+
+- name: add postgresql databases
+  postgresql_db:
+    name: "{{ item.name }}"
+    owner: "{{ item.owner }}"
+    login_user: postgres
+    port: "{{ postgresql_port }}"
+  with_items: "{{ postgresql_databases }}"
+  when: postgresql_databases[0].name is defined
+  tags: postgresql

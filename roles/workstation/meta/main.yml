@@ -9,12 +9,12 @@ dependencies:
   - role: ruby
     ruby_gems: [ bundler ]
   # - { role: jruby, jruby_gems: [ bundler ] }
-  - role: maven3
-    linux_user: "jscheel"
-    maven3_version_major: 3.3
-    maven3_version_minor: 3
-    maven3_default: "true"
-    maven3_latest: "true"
+  # - role: maven3
+  #   linux_user: "jscheel"
+  #   maven3_version_major: 3.3
+  #   maven3_version_minor: 3
+  #   maven3_default: "true"
+  #   maven3_latest: "true"
   - role: postgresql
     postgresql_users: "{{ postgresql_allc_users }}"
     postgresql_databases: "{{ postgresql_allc_databases }}"
@@ -31,3 +31,4 @@ dependencies:
   - atom
   # - sublime
   - docker-engine
+  - elixir

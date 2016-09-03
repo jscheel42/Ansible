@@ -1,0 +1,5 @@
+---
+
+- name: install erlang-esl
+  apt:
+    name: esl-erlang

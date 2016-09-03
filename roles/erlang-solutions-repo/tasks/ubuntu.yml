@@ -1,0 +1,11 @@
+---
+
+- name: install deb containing the erlang solutions repo
+  apt:
+    deb: "{{ erlang_solutions_repo_url }}"
+  register: erlang_solutions_repo_state
+
+- name: update apt cache if repo installed
+  apt:
+    update_cache: yes
+  when: erlang_solutions_repo_state|changed
