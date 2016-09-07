@@ -25,24 +25,30 @@
   roles:
     - virtualbox-guest
 
-- hosts: buildservers
+- hosts: jenkinsmasterservers
   vars_files:
     - .vault/secrets
   roles:
-    - java8
+    - jenkins-master
 
-- hosts: buildmasterservers
-  vars_files:
-    - .vault/secrets
-  roles:
-    # - hudson
-    - jenkins
+# - hosts: buildservers
+#   vars_files:
+#     - .vault/secrets
+#   roles:
+#     - java8
 
-- hosts: artifactoryservers
-  vars_files:
-    - .vault/secrets
-  roles:
-    - artifactory
+# - hosts: buildmasterservers
+#   vars_files:
+#     - .vault/secrets
+#   roles:
+#     # - hudson
+#     - jenkins
+
+# - hosts: artifactoryservers
+#   vars_files:
+#     - .vault/secrets
+#   roles:
+#     - artifactory
 
 - hosts: appsservers
   vars_files:

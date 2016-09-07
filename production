@@ -1,16 +1,20 @@
-[appsservers]
-joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
+# [appsservers]
+# joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
 
-[proxyservers]
-joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
+# [proxyservers]
+# joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
+
+[jenkinsmasterservers]
+jenkins.joshuascheel.com
 
 #############
 # GROUP UP
 #############
 
 [servers:children]
-appsservers
-proxyservers
+jenkinsmasterservers
+# appsservers
+# proxyservers
 
 [production:children]
 servers

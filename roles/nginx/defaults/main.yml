@@ -1,0 +1,4 @@
+---
+
+nginx_hostname: jenkins.joshuascheel.com
+nginx_le_root: /var/www/letsencrypt

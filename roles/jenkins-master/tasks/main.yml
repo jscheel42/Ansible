@@ -1,5 +1,6 @@
+
 ---
 
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
-  tags: nginx
+  tags: jenkins-master

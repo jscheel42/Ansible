@@ -4,18 +4,30 @@
   apt:
     name: nginx
     state: present
-  tags: nginx
+
+- name: create folder for letsencrypt webroot validation method
+  file:
+    state: directory
+    path: "{{ nginx_le_root }}"
 
 - name: setup nginx.conf
   template:
-    src: "{{ ansible_hostname }}.nginx.conf.j2"
+    src: "{{ nginx_hostname }}.nginx.conf.j2"
     dest: /etc/nginx/nginx.conf
   register: nginx_conf_update
-  tags: nginx
 
-- name: reload nginx is config was updated
+- name: reload nginx if config was updated
   service:
     name: nginx
     state: reloaded
   when: nginx_conf_update|changed
-  tags: nginx
+
+## Manual steps performed
+## See guide: https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
+# Comment out ssl section of nginx.conf temporarily
+# git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+# cd /opt/letsencrypt
+# ./letsencrypt-auto certonly -a webroot --webroot-path=/var/www/letsencrypt -d "jenkins.joshuascheel.com"
+## Add to root's crontab
+# 0 0 1 * * /opt/letsencrypt/letsencrypt-auto renew >> /var/log/le-renew.log
+# 5 0 1 * * /bin/systemctl reload nginx
