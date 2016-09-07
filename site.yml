@@ -30,6 +30,7 @@
     - .vault/secrets
   roles:
     - jenkins-master
+    - { role: docker-engine, docker_user: jenkins }
 
 # - hosts: buildservers
 #   vars_files:
