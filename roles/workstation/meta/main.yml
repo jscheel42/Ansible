@@ -6,8 +6,8 @@ dependencies:
       - { git_repo: "git@bitbucket.org:jscheel42/ansible.git", git_dir: "{{ git_ansible_dir }}" }
       - { git_repo: "git@bitbucket.org:jscheel42/ansiblevault.git", git_dir: "{{ git_ansible_vault_dir }}" }
       - { git_repo: "git@bitbucket.org:jscheel42/allcalculated.git", git_dir: "{{ git_user_home }}/Projects/AllCalculated" }
-  - role: ruby
-    ruby_gems: [ bundler ]
+  # - role: ruby
+  #   ruby_gems: [ bundler ]
   # - { role: jruby, jruby_gems: [ bundler ] }
   # - role: maven3
   #   linux_user: "jscheel"
