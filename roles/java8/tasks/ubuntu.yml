@@ -2,7 +2,6 @@
 
 - name: remove openjdk
   apt: name=*openjdk* state=absent
-  tags: java8
 
 - name: accept oracle license
   debconf:
@@ -10,16 +9,18 @@
     question: 'shared/accepted-oracle-license-v1-1'
     value: 'true'
     vtype: 'select'
-  tags: java8
+
+- name: add webupd8team/java key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 7B2C3B0889BF5709A105D03AC2518248EEA14886
 
 - name: add webupd8team/java
   apt_repository:
-    repo: ppa:webupd8team/java
+    repo: deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main
     state: present
-  tags: java8
 
-- name: install oracle java 8
+- name: install java 8
   apt:
     name: oracle-java8-installer
     state: present
-  tags: java8

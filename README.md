@@ -14,3 +14,7 @@ This project uses a ".vault" folder with files inside that contain variables wit
   * secret_postgresql_password_allc_enc: "postgres encrypted password for secret_postgresql_password_allc"
   * secret_artifactory_password: "foo"
   * secret_docker_hub_auth: "foo"
+  * secret_pgadmin4_csrf: "foofoofoofoofoofoofoofoofoo"
+  * secret_pgadmin4_key: "b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3" # This needs to be a 16 byte hex
+  * secret_pgadmin4_pwsalt: "foofoofoofoofoofoofoofoofoo"
+  * secret_pgadmin4_setup_pw: "foo"

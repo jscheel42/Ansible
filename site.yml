@@ -73,11 +73,16 @@
 - hosts: desktops
   vars_files:
     - .vault/secrets
+  vars:
+    ansible_distribution: "Ubuntu"
   roles:
     - desktop
 
 - hosts: laptops
   vars_files:
     - .vault/secrets
+  vars:
+    ansible_distribution: "Ubuntu"
   roles:
     - laptop
+    - { role: nginx, nginx_hostname: pgadmin.homenet }

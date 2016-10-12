@@ -32,3 +32,5 @@ dependencies:
   # - sublime
   - docker-engine
   - elixir
+  - java8
+  - pgadmin4

@@ -1,15 +1,5 @@
 ---
 
-- name: install ppas
-  apt_repository:
-    repo: "{{ item }}"
-    state: present
-    mode: 644
-  with_items:
-    - ppa:webupd8team/atom
-    - ppa:ansible/ansible
-  tags: workstation
-
 - name: add spotify apt key
   apt_key: keyserver=keyserver.ubuntu.com id=D2C19886
   register: spotify
@@ -36,7 +26,6 @@
   with_items:
     # - amarok
     - ansible
-    - atom
     - build-essential
     # - chromium-browser
     - deja-dup

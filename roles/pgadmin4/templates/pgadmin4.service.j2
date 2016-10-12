@@ -1,0 +1,14 @@
+[Unit]
+Description=PGAdmin4 Server Mode
+After=syslog.target
+
+[Service]
+Type=simple
+User={{ pgadmin4_user }}
+WorkingDirectory=/home/{{ pgadmin4_user }}/
+ExecStart=/usr/bin/python /home/{{ pgadmin4_user }}/.local/lib/python2.7/site-packages/pgadmin4/pgAdmin4.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

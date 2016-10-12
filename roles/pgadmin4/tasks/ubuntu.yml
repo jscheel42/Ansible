@@ -1,0 +1,58 @@
+---
+
+- name: add pgadmin user
+  user:
+    name: "{{ pgadmin4_user }}"
+
+- name: install apt packages needed for pgadmin4
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - python
+    - libpq-dev
+
+- name: get pgadmin4 wheel package
+  get_url:
+    url: "{{ pgadmin4_wheel_url }}"
+    dest: "{{ pgadmin4_wheel_dl }}"
+    owner: "{{ pgadmin4_user }}"
+  register: pgadmin4_downloaded
+
+- name: install pgadmin4 wheel package
+  become: true
+  become_user: "{{ pgadmin4_user }}"
+  pip:
+    name: "file://{{ pgadmin4_wheel_dl }}"
+    extra_args: "--user"
+  when: pgadmin4_downloaded|changed
+
+- name: add config_local.py
+  template:
+    src: config_local.py.j2
+    dest: "/home/{{ pgadmin4_user }}/.local/lib/python2.7/site-packages/pgadmin4/config_local.py"
+
+- name: run setup.py to create db
+  become: true
+  become_user: "{{ pgadmin4_user }}"
+  shell: python /home/{{ pgadmin4_user }}/.local/lib/python2.7/site-packages/pgadmin4/setup.py
+  args:
+    creates: "/home/{{ pgadmin4_user }}/.pgadmin/pgadmin4.db"
+  environment:
+    PGADMIN_SETUP_EMAIL: "{{ secret_generic_admin_email }}"
+    PGADMIN_SETUP_PASSWORD: "{{ secret_pgadmin4_setup_pw }}"
+
+- name: add pgadmin4 service file
+  template:
+    src: pgadmin4.service.j2
+    dest: /etc/systemd/system/pgadmin4.service
+  register: service_file_deployed
+
+- name: reload systemd service files if we added one
+  shell: systemctl daemon-reload
+  when: service_file_deployed|changed
+
+- name: start and enable the pgadmin4 service
+  service:
+    name: pgadmin4
+    enabled: yes
+    state: started
