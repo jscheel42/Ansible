@@ -7,6 +7,7 @@
   tags: bash
 
 - name: add entries to global bash configuration
-  lineinfile: dest=/etc/profile.d/global_path.sh line={{ bash_line }} state=present create=yes insertbefore="{{ bash_insert_before }}" #group={{ bash_user }}
+  lineinfile: dest=/etc/bash.bashrc line={{ bash_line }} state=present create=yes insertbefore="{{ bash_insert_before }}" #group={{ bash_user }}
+  # lineinfile: dest=/etc/profile.d/global_path.sh line={{ bash_line }} state=present create=yes insertbefore="{{ bash_insert_before }}" #group={{ bash_user }}
   when: bash_global == "yes"
   tags: bash
