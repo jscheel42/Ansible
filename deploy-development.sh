@@ -9,10 +9,10 @@
 
 CMD="ansible-playbook -i development site.yml --sudo --ask-vault-pass"
 CMD="$CMD -l pod.homenet"
-CMD="$CMD -t bash"
+# CMD="$CMD -t bash"
 # CMD="$CMD -v"
 
-#CMD="$CMD -e update_all_packages=yes"
+CMD="$CMD -e update_all_packages=yes"
 
 # $CMD -t workstation
 $CMD

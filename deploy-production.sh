@@ -5,9 +5,9 @@ CMD="ansible-playbook -i production site.yml --sudo --ask-vault-pass"
 
 CMD="$CMD -l jenkins.joshuascheel.com"
 # CMD="$CMD -t nginx"
-CMD="$CMD -v"
+# CMD="$CMD -v"
 
-# CMD="$CMD -e update_all_packages=yes"
+CMD="$CMD -e update_all_packages=yes"
 
 # $CMD -t firewall
 $CMD
