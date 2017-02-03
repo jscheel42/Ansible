@@ -37,6 +37,8 @@ dev-artifactory.homenet
 
 [appsservers]
 dev-apps01.homenet
+
+[heatbeatservers]
 berry.homenet
 
 #############

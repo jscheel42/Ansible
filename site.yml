@@ -59,6 +59,12 @@
     # - app_rewards
     # - app_allc
 
+- hosts: heatbeatservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - heatbeat
+
 - hosts: htpc
   vars_files:
     - .vault/secrets
