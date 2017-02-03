@@ -25,6 +25,7 @@
     name: "file://{{ pgadmin4_wheel_dl }}"
     extra_args: "--user"
   when: pgadmin4_downloaded|changed
+  notify: restart pgadmin4 service
 
 - name: add config_local.py
   template:

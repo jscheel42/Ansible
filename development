@@ -37,6 +37,7 @@ dev-artifactory.homenet
 
 [appsservers]
 dev-apps01.homenet
+berry.homenet
 
 #############
 # WORKSTATION

@@ -57,7 +57,7 @@
   roles:
     # - docker-engine # Should be covered by dependencies app_allc > app > docker-engine
     # - app_rewards
-    - app_allc
+    # - app_allc
 
 - hosts: htpc
   vars_files:

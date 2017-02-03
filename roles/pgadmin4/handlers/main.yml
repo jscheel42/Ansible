@@ -1,0 +1,7 @@
+---
+
+- name: restart pgadmin4 service
+  service:
+    name: pgadmin4
+    state: restarted
+  tags: pgadmin4
