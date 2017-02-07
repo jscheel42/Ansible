@@ -1,0 +1,16 @@
+---
+
+erlang_compile_version: 19.2
+elixir_compile_version: 1.4.1
+
+erlang_compile_install_prefix: /usr/local
+elixir_precompiled_install_path: /usr/local
+
+erlang_compile_url: "http://www.erlang.org/download/otp_src_{{ erlang_compile_version }}.tar.gz"
+erlang_compile_src_dir: "/usr/local/src/erlang-{{ erlang_compile_version }}"
+erlang_compile_src_tar: "{{ erlang_compile_src_dir }}/otp_src_{{ erlang_compile_version }}.tar.gz"
+erlang_compile_src_extracted: "{{ erlang_compile_src_dir }}/otp_src_{{ erlang_compile_version }}"
+
+elixir_precompiled_url: "https://github.com/elixir-lang/elixir/releases/download/v{{ elixir_compile_version }}/Precompiled.zip"
+elixir_precompiled_dir: "/usr/local/src/elixir-{{ elixir_compile_version }}"
+elixir_precompiled_zip: "{{ elixir_precompiled_dir }}/elixir-{{ elixir_compile_version }}.zip"

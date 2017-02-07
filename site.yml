@@ -12,6 +12,7 @@
     - .vault/secrets
   roles:
     - common
+    - update-nightly
 
 - hosts: proxyservers
   vars_files:

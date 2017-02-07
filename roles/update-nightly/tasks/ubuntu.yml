@@ -1,0 +1,8 @@
+---
+
+- name: setup crontab to run updates each day at midnight
+  cron:
+    minute: 0
+    hour: 0
+    job: /usr/bin/apt-get update && /usr/bin/apt-get -y upgrade
+    name: update-nightly

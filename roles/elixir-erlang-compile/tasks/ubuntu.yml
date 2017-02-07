@@ -1,0 +1,63 @@
+---
+
+# Based on the steps at https://wtfleming.github.io/2015/12/10/embedded-elixir-raspberry-pi/
+
+- name: install required packages for compilation
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - wget
+    - libssl-dev
+    - ncurses-dev
+    - m4
+    - unixodbc-dev
+    - erlang-dev
+
+- name: create dirs for source
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{ erlang_compile_src_dir }}"
+    - "{{ elixir_precompiled_dir }}"
+
+- name: download erlang tarball
+  get_url:
+    url: "{{ erlang_compile_url }}"
+    dest: "{{ erlang_compile_src_tar }}"
+
+- name: extract erlang tarball
+  unarchive:
+    src: "{{ erlang_compile_src_tar }}"
+    dest: "{{ erlang_compile_src_dir }}"
+    remote_src: yes
+    creates: "{{ erlang_compile_src_extracted }}"
+  register: erlang_extract
+
+- name: configure and compile erlang
+  shell: export ERL_TOP=`pwd` && ./configure --prefix={{ erlang_compile_install_prefix }} && make && make install
+  args:
+    chdir: "{{ erlang_compile_src_extracted }}"
+  when: erlang_extract|changed
+  
+- name: download elixir tarball
+  get_url:
+    url: "{{ elixir_precompiled_url }}"
+    dest: "{{ elixir_precompiled_zip }}"
+
+- name: extract precompiled elixir zip
+  unarchive:
+    src: "{{ elixir_precompiled_zip }}"
+    dest: "{{ elixir_precompiled_dir }}"
+    remote_src: yes
+    creates: "{{ elixir_precompiled_dir }}/VERSION"
+  register: elixir_extract
+  
+- name: copy elixir's bin, lib, man to path
+  shell: rsync -av {{ elixir_precompiled_dir }}/{{ item }} {{ elixir_precompiled_install_path }}
+  with_items:
+    - bin
+    - lib
+    - man
+  when: elixir_extract|changed
+  

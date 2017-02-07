@@ -3,9 +3,9 @@
 #############
 
 [virtualboxservers]
-dev-jenkins.homenet
-dev-artifactory.homenet
-dev-apps01.homenet
+# dev-jenkins.homenet
+# dev-artifactory.homenet
+# dev-apps01.homenet
 # dev-base.homenet
 
 #############
@@ -13,14 +13,14 @@ dev-apps01.homenet
 #############
 
 [buildmasterservers]
-dev-jenkins.homenet
+# dev-jenkins.homenet
 
 [buildslaveservers]
-dev-jenkins.homenet
+# dev-jenkins.homenet
 
 [buildservers:children]
-buildmasterservers
-buildslaveservers
+# buildmasterservers
+# buildslaveservers
 
 
 #############
@@ -28,7 +28,7 @@ buildslaveservers
 #############
 
 [artifactoryservers]
-dev-artifactory.homenet
+# dev-artifactory.homenet
 
 
 #############
@@ -36,7 +36,7 @@ dev-artifactory.homenet
 #############
 
 [appsservers]
-dev-apps01.homenet
+# dev-apps01.homenet
 
 [heatbeatservers]
 berry.homenet
@@ -50,7 +50,7 @@ berry.homenet
 pod.homenet ansible_connection=local
 
 [desktops]
-serenity.homenet
+# serenity.homenet
 # serenity.homenet ansible_connection=local
 
 [workstations:children]
