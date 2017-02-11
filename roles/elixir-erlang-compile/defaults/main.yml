@@ -1,7 +1,7 @@
 ---
 
 erlang_compile_version: 19.2
-elixir_compile_version: 1.4.1
+elixir_compile_version: 1.3.4
 
 erlang_compile_install_prefix: /usr/local
 elixir_precompiled_install_path: /usr/local

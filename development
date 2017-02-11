@@ -40,6 +40,7 @@
 
 [heatbeatservers]
 berry.homenet
+pod.homenet
 
 #############
 # WORKSTATION
