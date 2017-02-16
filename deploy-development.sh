@@ -8,8 +8,8 @@
 # CMD="ansible-playbook -i development --extra-vars "@neon_shim.json" site.yml --sudo --ask-vault-pass"
 
 CMD="ansible-playbook -i development site.yml --sudo --ask-vault-pass"
-CMD="$CMD -l berry.homenet"
-# CMD="$CMD -t elixir_erlang_compile"
+CMD="$CMD -l pod.homenet"
+# CMD="$CMD -t nginx"
 # CMD="$CMD -v"
 
 # CMD="$CMD -e update_all_packages=yes"

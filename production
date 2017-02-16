@@ -5,7 +5,7 @@
 # joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
 
 [jenkinsmasterservers]
-jenkins.joshuascheel.com
+joshuascheel.com
 
 #############
 # GROUP UP

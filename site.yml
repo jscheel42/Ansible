@@ -1,24 +1,11 @@
 ---
 
-# - hosts: landscapemasterservers
-#   vars_files:
-#     - .vault/secrets
-#   roles:
-#     - landscape-server
-#     - common
-
 - hosts: all
   vars_files:
     - .vault/secrets
   roles:
     - common
     - update-nightly
-
-- hosts: proxyservers
-  vars_files:
-    - .vault/secrets
-  roles:
-    - nginx
 
 - hosts: virtualboxservers
   vars_files:
@@ -33,63 +20,42 @@
     - jenkins-master
     - { role: docker-engine, docker_user: jenkins }
 
-# - hosts: buildservers
-#   vars_files:
-#     - .vault/secrets
-#   roles:
-#     - java8
-
-# - hosts: buildmasterservers
-#   vars_files:
-#     - .vault/secrets
-#   roles:
-#     # - hudson
-#     - jenkins
-
-# - hosts: artifactoryservers
-#   vars_files:
-#     - .vault/secrets
-#   roles:
-#     - artifactory
-
-- hosts: appsservers
-  vars_files:
-    - .vault/secrets
-  roles:
-    # - docker-engine # Should be covered by dependencies app_allc > app > docker-engine
-    # - app_rewards
-    # - app_allc
-
 - hosts: heatbeatservers
   vars_files:
     - .vault/secrets
   roles:
     - heatbeat
 
-- hosts: htpc
+##########################
+# SINGLE HOSTS DEV
+##########################
+
+- hosts: berry.homenet
+  vars_files:
+    - .vault/secrets
+  roles:
+    - { role: nginx, nginx_hostname: berry.homenet }
+    
+- hosts: pod.homenet
+  vars_files:
+    - .vault/secrets
+  roles:
+    - laptop
+    - { role: nginx, nginx_hostname: pgadmin.homenet }
+
+- hosts: htpc.homenet
   vars_files:
     - .vault/secrets
   roles:
     - { role: firewall, tcp_ports_allow: [5900] }
     - steam
 
-#############
-# LAPTOP
-#############
+##########################
+# SINGLE HOSTS PROD
+##########################
 
-- hosts: desktops
+- hosts: joshuascheel.com
   vars_files:
     - .vault/secrets
-  vars:
-    ansible_distribution: "Ubuntu"
   roles:
-    - desktop
-
-- hosts: laptops
-  vars_files:
-    - .vault/secrets
-  vars:
-    ansible_distribution: "Ubuntu"
-  roles:
-    - laptop
-    - { role: nginx, nginx_hostname: pgadmin.homenet }
+    - { role: nginx, nginx_hostname: jenkins.joshuascheel.com }
