@@ -1,0 +1,27 @@
+---
+
+- name: create {{ dht22_user }} user
+  user:
+    name: "{{ dht22_user }}"
+    generate_ssh_key: yes
+    shell: "/bin/bash"
+
+- name: add folder for dht22 app
+  become: true
+  become_user: "{{ dht22_user }}"
+  file:
+    state: directory
+    path: "{{ dht22_install_dir }}"
+
+- name: checkout dht22 git repo
+  become: true
+  become_user: "{{ dht22_user }}"
+  git:
+    repo: https://github.com/jscheel42/DHT22_reader.git
+    dest: "{{ dht22_install_dir }}"
+    accept_hostkey: yes
+
+- name: add sudoers file for access to dht22 sensor reading lib
+  template:
+    src: dht22_sudoers.j2
+    dest: /etc/sudoers.d/dht22_sudoers

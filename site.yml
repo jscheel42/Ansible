@@ -35,6 +35,7 @@
     - .vault/secrets
   roles:
     - { role: nginx, nginx_hostname: berry.homenet }
+    - dht22
     
 - hosts: pod.homenet
   vars_files:
@@ -59,3 +60,4 @@
     - .vault/secrets
   roles:
     - { role: nginx, nginx_hostname: jenkins.joshuascheel.com }
+    - { role: nginx, nginx_hostname: heatbeat.joshuascheel.com }

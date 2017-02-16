@@ -1,0 +1,4 @@
+---
+  
+dht22_user: dht22
+dht22_install_dir: "/home/{{ dht22_user }}/app"
