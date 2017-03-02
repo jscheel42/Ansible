@@ -9,7 +9,7 @@
 
 CMD="ansible-playbook -i development site.yml --sudo --ask-vault-pass"
 CMD="$CMD -l berry.homenet"
-# CMD="$CMD -t nginx"
+# CMD="$CMD -t ssh-keys"
 # CMD="$CMD -v"
 
 # CMD="$CMD -e update_all_packages=yes"

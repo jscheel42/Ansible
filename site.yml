@@ -18,13 +18,18 @@
     - .vault/secrets
   roles:
     - jenkins-master
-    - { role: docker-engine, docker_user: jenkins }
 
 - hosts: heatbeatservers
   vars_files:
     - .vault/secrets
   roles:
     - heatbeat
+
+- hosts: allcalculatedservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - all_calculated
 
 ##########################
 # SINGLE HOSTS DEV
@@ -37,19 +42,25 @@
     - { role: nginx, nginx_hostname: berry.homenet }
     - dht22
     
-- hosts: pod.homenet
-  vars_files:
-    - .vault/secrets
-  roles:
-    - laptop
-    - { role: nginx, nginx_hostname: pgadmin.homenet }
-
 - hosts: htpc.homenet
   vars_files:
     - .vault/secrets
   roles:
     - { role: firewall, tcp_ports_allow: [5900] }
     - steam
+
+- hosts: jenkins.homenet
+  vars_files:
+    - .vault/secrets
+  roles:
+    - { role: nginx, nginx_hostname: jenkins.homenet }
+
+- hosts: pod.homenet
+  vars_files:
+    - .vault/secrets
+  roles:
+    - laptop
+    - { role: nginx, nginx_hostname: pgadmin.homenet }
 
 ##########################
 # SINGLE HOSTS PROD
@@ -59,5 +70,6 @@
   vars_files:
     - .vault/secrets
   roles:
-    - { role: nginx, nginx_hostname: jenkins.joshuascheel.com }
+    # - { role: nginx, nginx_hostname: jenkins.joshuascheel.com }
     - { role: nginx, nginx_hostname: heatbeat.joshuascheel.com }
+    - { role: nginx, nginx_hostname: ac.joshuascheel.com }

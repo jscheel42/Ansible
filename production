@@ -1,13 +1,7 @@
-# [appsservers]
-# joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
-
-# [proxyservers]
-# joshuascheel.com ansible_python_interpreter=/usr/bin/python2.7
-
-[jenkinsmasterservers]
+[heatbeatservers]
 joshuascheel.com
 
-[heatbeatservers]
+[allcalculatedservers]
 joshuascheel.com
 
 #############
@@ -15,9 +9,7 @@ joshuascheel.com
 #############
 
 [servers:children]
-jenkinsmasterservers
-# appsservers
-# proxyservers
+heatbeatservers
 
 [production:children]
 servers

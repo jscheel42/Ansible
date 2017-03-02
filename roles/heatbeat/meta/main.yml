@@ -2,6 +2,4 @@
 
 dependencies:
   - role: postgresql
-    postgresql_users: "{{ postgresql_heatbeat_users }}"
-    postgresql_databases: "{{ postgresql_heatbeat_databases }}"
-  - elixir-erlang-compile
+  - { role: docker-engine, docker_user: heatbeat }

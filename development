@@ -3,40 +3,18 @@
 #############
 
 [virtualboxservers]
-# dev-jenkins.homenet
-# dev-artifactory.homenet
-# dev-apps01.homenet
-# dev-base.homenet
+jenkins.homenet
 
 #############
 # HUDSON / JENKINS
 #############
 
-[buildmasterservers]
-# dev-jenkins.homenet
-
-[buildslaveservers]
-# dev-jenkins.homenet
-
-[buildservers:children]
-# buildmasterservers
-# buildslaveservers
-
-
-#############
-# ARTIFACTORY
-#############
-
-[artifactoryservers]
-# dev-artifactory.homenet
-
+[jenkinsmasterservers]
+jenkins.homenet
 
 #############
 # APPS
 #############
-
-[appsservers]
-# dev-apps01.homenet
 
 [heatbeatservers]
 berry.homenet
@@ -71,13 +49,8 @@ htpc.homenet
 #############
 
 [servers:children]
-# landscapemasterservers
-# spacewalkservers
-# glassfishservers
-artifactoryservers
-buildservers
-appsservers
 virtualboxservers
+jenkinsmasterservers
 
 [development:children]
 htpc

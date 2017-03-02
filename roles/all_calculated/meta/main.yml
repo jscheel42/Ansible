@@ -1,0 +1,5 @@
+---
+
+dependencies:
+  - role: postgresql
+  - { role: docker-engine, docker_user: all_calculated }

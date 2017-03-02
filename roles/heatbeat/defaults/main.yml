@@ -1,4 +1,3 @@
 ---
   
 heatbeat_user: heatbeat
-heatbeat_install_dir: "~{{ heatbeat_user }}/app"

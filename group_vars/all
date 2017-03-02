@@ -25,16 +25,3 @@ postgresql_allc_databases:
       owner: allc }
   - { name: allc_test,
       owner: allc }
-
-postgresql_heatbeat_users:
-  - { name: "heatbeat",
-      perms: "LOGIN,CREATEDB",
-      password: "{{ secret_postgresql_password_heatbeat_enc }}"}
-
-postgresql_heatbeat_databases:
-  - { name: heatbeat_dev,
-      owner: heatbeat }
-  - { name: heatbeat_prod,
-      owner: heatbeat }
-  - { name: heatbeat_test,
-      owner: heatbeat }

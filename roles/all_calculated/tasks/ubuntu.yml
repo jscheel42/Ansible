@@ -1,0 +1,7 @@
+---
+
+- name: create {{ all_calculated_user }} user
+  user:
+    name: "{{ all_calculated_user }}"
+    generate_ssh_key: yes
+    shell: "/bin/bash"
