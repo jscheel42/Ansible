@@ -62,6 +62,13 @@
     - laptop
     - { role: nginx, nginx_hostname: pgadmin.homenet }
 
+- hosts: serenity.homenet
+  vars_files:
+    - .vault/secrets
+  roles:
+    - desktop
+    - { role: nginx, nginx_hostname: pgadmin.homenet }
+
 ##########################
 # SINGLE HOSTS PROD
 ##########################

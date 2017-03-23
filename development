@@ -29,7 +29,7 @@ pod.homenet
 pod.homenet ansible_connection=local
 
 [desktops]
-# serenity.homenet
+serenity.homenet
 # serenity.homenet ansible_connection=local
 
 [workstations:children]

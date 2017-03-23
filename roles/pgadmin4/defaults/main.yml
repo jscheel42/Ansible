@@ -1,5 +1,5 @@
 pgadmin4_user: pgadmin
-pgadmin4_version: 1.2
-pgadmin4_wheel_filename: pgadmin4-{{ pgadmin4_version }}-py2-none-any.whl
+pgadmin4_version: 1.3
+pgadmin4_wheel_filename: pgadmin4-{{ pgadmin4_version }}-py2.py3-none-any.whl
 pgadmin4_wheel_url: https://ftp.postgresql.org/pub/pgadmin3/pgadmin4/v{{ pgadmin4_version }}/pip/{{ pgadmin4_wheel_filename }}
 pgadmin4_wheel_dl: "/home/{{ pgadmin4_user }}/{{ pgadmin4_wheel_filename }}"

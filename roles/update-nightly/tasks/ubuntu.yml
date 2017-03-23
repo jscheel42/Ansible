@@ -4,5 +4,13 @@
   cron:
     minute: 0
     hour: 0
-    job: /usr/bin/apt-get update && /usr/bin/apt-get -y upgrade
+    job: /usr/bin/apt-get update; PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin /usr/bin/apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
     name: update-nightly
+
+- name: setup crontab to run dist-upgrade each Sunday
+  cron:
+    minute: 0
+    hour: 1
+    weekday: 0
+    job: /usr/bin/apt-get update; PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin /usr/bin/apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+    name: update-weekly
