@@ -4,15 +4,20 @@ joshuascheel.com
 [allcalculatedservers]
 joshuascheel.com
 
+[vpnservers]
+vpn.ocean
+
 #############
 # GROUP UP
 #############
 
 [servers:children]
 heatbeatservers
+vpnservers
 
 [production:children]
 servers
 
 [all:children]
 production
+vpnservers

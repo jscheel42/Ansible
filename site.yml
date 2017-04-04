@@ -40,6 +40,7 @@
     - .vault/secrets
   roles:
     - { role: nginx, nginx_hostname: berry.homenet }
+    - { role: firewall, tcp_ports_allow: [53], udp_ports_allow: [53,123,1198] }
     - dht22
     
 - hosts: htpc.homenet
@@ -68,6 +69,12 @@
   roles:
     - desktop
     - { role: nginx, nginx_hostname: pgadmin.homenet }
+
+- hosts: vpnservers
+  vars_files:
+    - .vault/secrets
+  roles:
+  - { role: firewall, tcp_ports_allow: [10512] }
 
 ##########################
 # SINGLE HOSTS PROD
