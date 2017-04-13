@@ -18,3 +18,7 @@ This project uses a ".vault" folder with files inside that contain variables wit
   * secret_pgadmin4_key: "b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3 b3" # This needs to be a 16 byte hex
   * secret_pgadmin4_pwsalt: "foofoofoofoofoofoofoofoofoo"
   * secret_pgadmin4_setup_pw: "foo"
+  * secret_vpn_ip: "5.5.5.5"
+
+- .vault/ocean.ovpn
+  * This file is an ansible-vault encrypted ovpn file.

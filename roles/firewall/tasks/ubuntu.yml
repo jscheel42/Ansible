@@ -22,11 +22,6 @@
   notify: reload ufw settings
   tags: firewall
 
-- name: allow outgoing traffic
-  ufw: direction=outgoing policy=allow
-  notify: reload ufw settings
-  tags: firewall
-
 - name: restrict incoming traffic
   ufw: direction=incoming policy=deny
   notify: reload ufw settings

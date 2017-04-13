@@ -1,0 +1,9 @@
+---
+
+- name: setup crontab to reboot each Sunday
+  cron:
+    minute: 0
+    hour: 3
+    weekday: 0
+    job: /sbin/reboot
+    name: reboot-weekly

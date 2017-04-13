@@ -59,3 +59,10 @@
     dest: "~{{ docker_user }}/.docker/config.json"
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
+
+- name: setup spotify-gc to run daily
+  cron:
+    minute: 0
+    hour: 23
+    job: /usr/bin/docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc:ro spotify/docker-gc
+    name: docker-gc-daily

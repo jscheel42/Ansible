@@ -1,0 +1,62 @@
+---
+
+- name: install openvpn client
+  apt:
+    name: openvpn
+    state: present
+
+- name: copy openvpn profile
+  copy:
+    src: .vault/ocean.ovpn
+    dest: /etc/openvpn/ocean.conf
+
+- name: start and enable openvpn@ocean.service
+  service:
+    name: openvpn@ocean.service
+    state: started
+    enabled: yes
+
+- name: ufw allow out from any to {{ vpn_ocean_lan_subnet }}
+  ufw:
+    rule: allow
+    direction: out
+    to_ip: "{{ vpn_ocean_lan_subnet }}"
+
+- name: ufw allow in from any to {{ vpn_ocean_lan_subnet }}
+  ufw:
+    rule: allow
+    direction: in
+    from_ip: "{{ vpn_ocean_lan_subnet }}"
+
+- name: ufw allow out on tun0 from any to any
+  ufw:
+    rule: allow
+    direction: out
+    interface: tun0
+
+- name: ufw allow in on tun0 from any to any
+  ufw:
+    rule: allow
+    direction: in
+    interface: tun0
+
+- name: ufw default deny out
+  ufw:
+    default: deny
+    direction: outgoing
+
+- name: ufw default deny in
+  ufw:
+    default: deny
+    direction: incoming
+
+- name: ufw allow out from any to {{ secret_vpn_ip }}
+  ufw:
+    rule: allow
+    direction: out
+    to_ip: "{{ secret_vpn_ip }}"
+
+- name: ufw enable
+  service:
+    name: ufw
+    state: started

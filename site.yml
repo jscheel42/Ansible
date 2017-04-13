@@ -31,6 +31,24 @@
   roles:
     - all_calculated
 
+- hosts: rebootweeklyservers
+  vars_files:
+    - .vault/secrets
+  roles:
+    - reboot-weekly
+
+- hosts: vpnhostservers
+  vars_files:
+    - .vault/secrets
+  roles:
+  - { role: firewall, tcp_ports_allow: [10512] }
+
+- hosts: vpnoceanclients
+  vars_files:
+    - .vault/secrets
+  roles:
+  - vpn-ocean
+
 ##########################
 # SINGLE HOSTS DEV
 ##########################
@@ -69,12 +87,6 @@
   roles:
     - desktop
     - { role: nginx, nginx_hostname: pgadmin.homenet }
-
-- hosts: vpnservers
-  vars_files:
-    - .vault/secrets
-  roles:
-  - { role: firewall, tcp_ports_allow: [10512] }
 
 ##########################
 # SINGLE HOSTS PROD

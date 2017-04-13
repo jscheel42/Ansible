@@ -43,6 +43,22 @@ desktops
 [htpc]
 htpc.homenet
 
+#############
+# OTHER
+#############
+
+[rebootweeklyservers]
+berry.homenet
+jenkins.homenet
+pod.homenet
+serenity.homenet
+
+[vpnoceanclients]
+berry.homenet
+htpc.homenet
+jenkins.homenet
+pod.homenet
+serenity.homenet
 
 #############
 # GROUP UP
@@ -51,6 +67,8 @@ htpc.homenet
 [servers:children]
 virtualboxservers
 jenkinsmasterservers
+rebootweeklyservers
+vpnoceanclients
 
 [development:children]
 htpc

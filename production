@@ -4,7 +4,15 @@ joshuascheel.com
 [allcalculatedservers]
 joshuascheel.com
 
-[vpnservers]
+[vpnhostservers]
+vpn.ocean
+
+#############
+# OTHER
+#############
+
+[rebootweeklyservers]
+joshuascheel.com
 vpn.ocean
 
 #############
@@ -13,11 +21,12 @@ vpn.ocean
 
 [servers:children]
 heatbeatservers
-vpnservers
+vpnhostservers
+rebootweeklyservers
 
 [production:children]
 servers
 
 [all:children]
 production
-vpnservers
+vpnhostservers
