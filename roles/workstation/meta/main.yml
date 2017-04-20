@@ -24,7 +24,7 @@ dependencies:
   # - grails
   # - play
   # - spring
-  # - intellij
+  - intellij
   # - pycharm
   # - netbeans
   # - eclipse

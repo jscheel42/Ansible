@@ -17,7 +17,7 @@
 
 - name: add webupd8team/java
   apt_repository:
-    repo: deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main
+    repo: 'ppa:webupd8team/java'
     state: present
 
 - name: install java 8

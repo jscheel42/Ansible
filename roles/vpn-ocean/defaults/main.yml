@@ -1,3 +1,4 @@
 ---
 
 vpn_ocean_lan_subnet: "192.168.42.0/24"
+vpn_ocean_user: jscheel

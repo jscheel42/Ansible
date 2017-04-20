@@ -7,7 +7,7 @@
 
 - name: add webupd8team/atom
   apt_repository:
-    repo: deb http://ppa.launchpad.net/webupd8team/atom/ubuntu xenial main
+    repo: 'ppa:webupd8team/atom'
     state: present
 
 - name: install atom

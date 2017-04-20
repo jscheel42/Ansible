@@ -1,0 +1,12 @@
+---
+
+dependencies:
+  - sudo
+  - role: bash
+    bash_global: "no"
+    bash_user: "jscheel"
+    bash_line: "alias vpn-restart=\"sudo /bin/systemctl restart openvpn@ocean.service\""
+  - role: bash
+    bash_global: "no"
+    bash_user: "jscheel"
+    bash_line: "alias vpn-status=\"sudo /bin/systemctl status openvpn@ocean.service\""

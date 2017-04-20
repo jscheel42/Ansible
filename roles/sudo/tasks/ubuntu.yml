@@ -6,11 +6,9 @@
     append: yes
     groups: "sudo"
   with_items: "{{ sudo_admin_list }}"
-  tags: sudo
 
 - name: upload sudoers config
   template:
     src: ubuntu_sudoers.j2
     dest: /etc/sudoers
     validate: 'visudo -cf %s'
-  tags: sudo

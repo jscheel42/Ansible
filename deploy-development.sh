@@ -10,7 +10,7 @@ CMD="ansible-playbook -i development --extra-vars "@neon_shim.json" site.yml --s
 #CMD="ansible-playbook -i development site.yml --sudo --ask-vault-pass"
 
 # CMD="$CMD -l pod.homenet"
-# CMD="$CMD -t vpn-ocean"
+CMD="$CMD -t vpn-ocean"
 # CMD="$CMD -v"
 
 # CMD="$CMD -e update_all_packages=yes"

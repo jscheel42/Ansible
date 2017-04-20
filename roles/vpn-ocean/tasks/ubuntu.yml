@@ -60,3 +60,8 @@
   service:
     name: ufw
     state: started
+
+- name: allow {{ vpn_ocean_user }} to control vpn service w/o password
+  template:
+    src: sudoers-vpn-ocean.j2
+    dest: /etc/sudoers.d/vpn-ocean
