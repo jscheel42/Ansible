@@ -1,0 +1,24 @@
+---
+
+- name: add nodejs apt key
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    state: present
+  register: nodejs_apt_key_add
+
+- name: add apt source file
+  template:
+    src: "{{ nodejs_source_filename }}.j2"
+    dest: "{{ nodejs_source_filepath }}"
+  register: nodejs_source_file_create
+
+- name: update apt if a file was added
+  apt:
+    update_cache: yes
+  when: nodejs_source_file_create|changed or nodejs_apt_key_add|changed
+
+- name: install nodejs
+  apt:
+    name: nodejs
+    state: present
+  

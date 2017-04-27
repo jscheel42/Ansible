@@ -33,4 +33,5 @@ dependencies:
   - docker-engine
   - elixir-erlang-compile
   - java8
-  - pgadmin4
+  # - pgadmin4
+  - nodejs

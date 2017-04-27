@@ -22,6 +22,12 @@
   notify: reload ufw settings
   tags: firewall
 
+- name: allow outgoing traffic for non-vpn servers
+  ufw: direction=outgoing policy=allow
+  notify: reload ufw settings
+  when: "'vpnoceanclients' not in group_names"
+  tags: firewall
+
 - name: restrict incoming traffic
   ufw: direction=incoming policy=deny
   notify: reload ufw settings

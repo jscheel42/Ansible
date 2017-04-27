@@ -1,0 +1,4 @@
+---
+
+nodejs_source_filename: nodesource.list
+nodejs_source_filepath: /etc/apt/sources.list.d/{{ nodejs_source_filename }}
